@@ -16,6 +16,8 @@ import SearchIcon from '@material-ui/icons/Search'
 
 import { makeStyles } from '@material-ui/styles'
 import CepField from '../../components/CepField'
+import FreteField from '../../components/FreteField'
+import store from '../../store/index'
 
 const useStyles = makeStyles((theme) => ({
     botao: {
@@ -93,17 +95,7 @@ const Home = (props) => {
                 />
                 
                 <Grid xs={12} container justify="center" alignItems="center">
-                    <TextField 
-                        required
-                        className={classes.textField}
-                        id="valorFrete"
-                        label="Valor do frete"
-                        value={frete}
-                        helperText='use "," como separador'
-                        InputProps={{
-                            startAdornment: <InputAdornment position="start">R$</InputAdornment>
-                        }}
-                    />
+                   <FreteField />
                 </Grid>       
             </form>
 
@@ -121,4 +113,4 @@ const Home = (props) => {
    )
 }
 
-export default connect(store => ({cepOrigem: store.cepOrigem, cepDestino: store.cepDestino}))(Home)
+export default connect(store => ({cepOrigem: store.CepReducer.cepOrigem, cepDestino: store.CepReducer.cepDestino}))(Home)

@@ -58,7 +58,7 @@ const CepField = ({id, label, value, ...props}) => {
                 id={id}
                 label={label}
                 onChange={handleTextChange}
-                value={value.trim()}
+                value={value}
                 helperText={helperErrorText !== '' ? helperErrorText : "Somente números"}
                 onBlur={cepValidate}
             />
@@ -67,4 +67,4 @@ const CepField = ({id, label, value, ...props}) => {
 
 }
 
-export default connect(store =>({cepOrigem: store.cepOrigem, cepDestino: store.cepDestino}))(CepField)
+export default connect(store =>({cepOrigem: store.CepReducer.cepOrigem, cepDestino: store.CepReducer.cepDestino}))(CepField)

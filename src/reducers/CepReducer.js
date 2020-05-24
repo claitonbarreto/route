@@ -1,6 +1,6 @@
 const initialState = {
     cepOrigem: '',
-    cepDestino: ''
+    cepDestino: '',
 }
 
 export default (state = initialState, action) => {

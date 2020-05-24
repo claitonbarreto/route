@@ -1,6 +1,4 @@
 import { createStore } from 'redux'
-import CepReducer from '../reducers/CepReducer'
+import reducers from '../reducers/index' 
 
-const reducers = () => {return {CepReducer}}
-
-export default createStore(CepReducer)
+export default createStore(reducers)
