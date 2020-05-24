@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-
+import { connect } from 'react-redux'
 import { 
     Button,
     Grid,
@@ -15,11 +15,7 @@ import Icon from '@material-ui/core/Icon'
 import SearchIcon from '@material-ui/icons/Search'
 
 import { makeStyles } from '@material-ui/styles'
-
-import validations from './validations'
-
-import axios from 'axios'
-
+import CepField from '../../components/CepField'
 
 const useStyles = makeStyles((theme) => ({
     botao: {
@@ -41,10 +37,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const Home = () => {
+const Home = (props) => {
     
-    const [cepOrigem, setCepOrigem] = useState('')
-    const [cepDestino, setCepDestino] = useState('')
     const [frete, setFrete] = useState(0)
     
     var fieldsErros = {
@@ -56,28 +50,13 @@ const Home = () => {
         }
     }
 
-    const handleTextChange = e => {
-        if(e.target.id === 'cepOrigem') setCepOrigem(e.target.value)
-        if(e.target.id === 'cepDestino') setCepDestino(e.target.value)
-    }
-
     const handleClick = e => {
-        const cepOrigemValidation = validations(cepOrigem, 'cep')
-        const cepDestinoValidation = validations(cepDestino, 'cep')
-    }
-
-    const handleFreteChange = e => {
-        setFrete(e.target.value)
+       console.log(props.cepOrigem)
+       console.log(props.cepDestino)
     }
 
     const classes = useStyles()
 
-    useEffect(async () => {
-        axios.get('http://api.route')
-        .then(res => {
-            console.log(res)
-        })
-    })
    return (
     <>
         <Grid
@@ -100,27 +79,17 @@ const Home = () => {
         >
             <form>
 
-                <TextField
-                    error={fieldsErros.cepOrigem.isError}
-                    required
-                    className={classes.textField}
-                    id="cepOrigem"
-                    label="CEP de Origem"
-                    onChange={handleTextChange}
-                    value={cepOrigem}
-                    helperText="Somente números"
+                <CepField 
+                    id="ORIGEM"
+                    label="Cep de Origem"
+                    value={props.cepOrigem}
                 />
             
             
-                <TextField 
-                    error={fieldsErros.cepDestino.isError}
-                    required
-                    className={classes.textField}
-                    id="cepDestino"
-                    label="CEP de Destino"
-                    onChange={handleTextChange}
-                    value={cepDestino}
-                    helperText="Somente números"
+                <CepField 
+                    id="DESTINO"
+                    label="Cep de Destino"
+                    value={props.cepDestino}
                 />
                 
                 <Grid xs={12} container justify="center" alignItems="center">
@@ -129,7 +98,6 @@ const Home = () => {
                         className={classes.textField}
                         id="valorFrete"
                         label="Valor do frete"
-                        onChange={handleFreteChange}
                         value={frete}
                         helperText='use "," como separador'
                         InputProps={{
@@ -153,4 +121,4 @@ const Home = () => {
    )
 }
 
-export default Home
+export default connect(store => ({cepOrigem: store.cepOrigem, cepDestino: store.cepDestino}))(Home)
