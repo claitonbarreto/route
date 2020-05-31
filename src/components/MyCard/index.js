@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react'
 
-//BOOTSTRAP
-import Container from 'react-bootstrap/Container'
-import { Row, Col } from 'react-bootstrap'
-
 //MATERIAL-UI
-import { TextField, Button, InputAdornment } from '@material-ui/core'
+import { TextField, Button, InputAdornment, Grid } from '@material-ui/core'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import MailIcon from '@material-ui/icons/Mail';
 
 //styled
 import styled from 'styled-components'
+
+//STORE
+import store from '../../store/index'
+
+//My components
+import Header from './Header'
+import CepField from '../CepField'
+import FreteField from '../FreteField'
+import validations from './validations'
 
 const CardContent = styled.div`
     border: 3px solid #05a8aa;
@@ -19,21 +25,25 @@ const CardContent = styled.div`
     height: auto;
     margin-top: -25px;
     padding: 25px;
+    background-color: white;
 `;
 
-const HeaderContent = styled.div`
-    background-color: #05a8aa;
-    border-radius: 10px;
-    width: 60%;
-    text-align: center;
-    z-index: 2
-`
-
-const Title = styled.h1`
-    color: white;
-    font-size: 27pt;
-    font-weight: 300
-`
+const MyTextInput = styled.div`
+    margin: 5px 0px 20px 0px;
+    width: 100%;
+    & .Mui-focused {
+        color: #00696A
+    }
+    & .Mui-focused * {
+        color: #00696A
+    }
+    & label.Mui-focused {
+        color: #00696A;
+    }
+    & .MuiInput-underline:after {
+        border-bottom-color: #00696A
+    }
+`;
 
 const CardForm = styled.div`
     display: flex;
@@ -41,76 +51,74 @@ const CardForm = styled.div`
     align-items: center;
     padding: 0 15%;
     margin-top: 80px;
-`
-
-const MyTextInput = styled.div`
-    margin: 5px 0px 20px 0px;
-    width: 100%;
-    & * {
-        width: 100%
-    }
-`
+`;
 
 const MyButton = styled.div`
     margin-top: 60px;
     background-color: #ED6A5A;
     border-radius: 10px;
     & * {color: white;}
-`
+`;
 
-const CardHeader = ({title}) => {
-    return(
-        <HeaderContent>
-            <Title>{title}</Title>
-        </HeaderContent>
-    )
+const Text = styled.p`
+    text-align: center;
+    font-weight: 300;
+    font-size: 12pt;
+    color: ${props => props.color};
+    margin-bottom: 5px;
+`;
+
+const handleSend = (e) => {
+    console.log(store.getState())
 }
 
 const MyCard = () => {
 
     return (
-        <Container>
-            <Row className="justify-content-center">
-                <CardHeader 
-                title="Cálculo de frete"
-                />
-            </Row>
-            <Row className="justify-content-center">
+        <>
+            <Grid container xs={4} md={6} direction="row" justify="center">
+                <Header title="Cálculo de frete" />
                 <CardContent>
-                        <CardForm>
-                            <MyTextInput>
-                                <TextField 
-                                    label="CEP de Origem"
-                                    helperText="somente números"
-                                />
-                            </MyTextInput>
-                            <MyTextInput>
-                                <TextField
-                                    label="CEP de origem"
-                                    helperText="somente números"
-                                />
-                            </MyTextInput>
-                            <MyTextInput>
-                                <TextField
-                                    label="Frete"
-                                    helperText="separar por (,)"
-                                    InputProps={{
-                                        startAdornment: <InputAdornment position="start">R$</InputAdornment>
-                                    }}
-                                />
-                            </MyTextInput>
-                            
-                            <MyButton>
-                                <Button
-                                    endIcon={<ArrowForwardIosIcon />}
-                                >
-                                    Calcular
-                                </Button>
-                            </MyButton>
-                        </CardForm>
-                </CardContent>
-            </Row>       
-        </Container>
+                            <CardForm>
+                                <MyTextInput>
+                                    <CepField 
+                                        id="ORIGEM"
+                                        label="CEP de Origem"
+                                    />
+                                </MyTextInput>
+                                <MyTextInput>
+                                    <CepField 
+                                        id="DESTINO"
+                                        label="CEP de Destino"
+                                    />
+                                </MyTextInput>
+                                <MyTextInput>
+                                    <FreteField 
+
+                                    />
+                                </MyTextInput>
+                                
+                                <MyButton>
+                                    <Button
+                                        endIcon={<ArrowForwardIosIcon />}
+                                        onClick={handleSend}
+                                    >
+                                        Calcular
+                                    </Button>
+                                </MyButton>
+                            </CardForm>
+                    </CardContent>
+            </Grid>
+            <Grid xs={12} style={{marginTop: '20px'}}>
+                <Text>Alguma sugestão ou reclamação? Não de acanhe, me envie um e-mail:</Text>
+                <a href="#">
+                    <Text color="#ED6A5A">
+                        <MailIcon />
+                        claitonbarreto@gmail.com
+                    </Text>
+                </a>
+            </Grid>
+        </>
     )
 }
 

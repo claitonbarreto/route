@@ -1,21 +1,15 @@
 import React, { useState } from 'react'
 import FreteActions from '../actions/FreteAction'
+import ErrorAction from '../actions/ErrorAction'
 import { connect } from 'react-redux'
 import { TextField, InputAdornment } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import validations from '../views/Home/validations'
+
+import validations from './MyCard/validations'
 
 
-const useStyles = makeStyles({
-    textField: {
-        margin: '10px 10px 20px 10px'
-    }
-})
 
 const FreteField = (props) => {
-
-    const classes = useStyles()
-
 
     const [error, setError] = useState(false)
     const [helperErrorText, setHelperErrorText] = useState('')
@@ -25,6 +19,7 @@ const FreteField = (props) => {
         if(validacao !== true) {
             setError(true)
             setHelperErrorText(validacao)
+            props.dispatch(ErrorAction.setError(validacao, 221))
         }
 
         if(validacao == true) {
@@ -42,7 +37,6 @@ const FreteField = (props) => {
             <TextField 
                 required
                 error={error}
-                className={classes.textField}
                 id="FRETE"
                 label="Valor do frete"
                 value={props.frete}
@@ -52,6 +46,7 @@ const FreteField = (props) => {
                 InputProps={{
                     startAdornment: <InputAdornment position="start">R$</InputAdornment>
                 }}
+                fullWidth
             />
         </>
     )
