@@ -1,7 +1,13 @@
 import apiConnection from '../apiConnection'
 
-export default () => {
-    const getRoute = () => {
-        // IMPLEMENTAR FUNCAO PARA BUSCAR ROTA
+const routeStore = {
+    getRoute: async () => {
+        return await apiConnection.get('route/25265080/25931686')
+    },
+
+    getGeoCode: async () => {
+        return await apiConnection.get('code/25265080000')
     }
 }
+
+export default routeStore;

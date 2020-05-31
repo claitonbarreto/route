@@ -14,29 +14,18 @@ import {
 import Icon from '@material-ui/core/Icon'
 import SearchIcon from '@material-ui/icons/Search'
 
+
+//BOOTSTRAP
+import { Container, Row, Col } from 'react-bootstrap'
+
 import { makeStyles } from '@material-ui/styles'
 import CepField from '../../components/CepField'
 import FreteField from '../../components/FreteField'
 import store from '../../store/index'
+import routeStore from '../../@api/store/routeStore'
 
-const useStyles = makeStyles((theme) => ({
-    botao: {
-        marginTop: 40
-    },
-    grid: {
-        height: '95%',
-        width: '100vw'
-    },
-    titleGrid: {
-        height: '5%',
-    },
-    textField: {
-        margin: '10px 10px 20px 10px'
-    },
-    title: {
-        color: '#444'
-    }
-}))
+
+import MyCard from '../../components/MyCard/index'
 
 
 const Home = (props) => {
@@ -53,63 +42,27 @@ const Home = (props) => {
     }
 
     const handleClick = e => {
-       console.log(props.cepOrigem)
-       console.log(props.cepDestino)
+        routeStore.getGeoCode()
+        .then(res => console.log(res))
+        
+        
+        routeStore.getRoute()
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
 
-    const classes = useStyles()
-
    return (
-    <>
-        <Grid
-            xs={12}
-            container
-            className={classes.titleGrid}
-            justify="center"
-            alignItems="center"    
-        >
-            <h1 className={classes.title}> Traçe sua rota </h1>
-        </Grid>
-    
-        <Grid 
-            className={classes.grid}
-            justify="center"
-            alignItems="center"
-            container
-            spacing={1}
-            direction="column"
-        >
-            <form>
+    <div>
+        <Container className="justify-content-center">
 
-                <CepField 
-                    id="ORIGEM"
-                    label="Cep de Origem"
-                    value={props.cepOrigem}
-                />
-            
-            
-                <CepField 
-                    id="DESTINO"
-                    label="Cep de Destino"
-                    value={props.cepDestino}
-                />
-                
-                <Grid xs={12} container justify="center" alignItems="center">
-                   <FreteField />
-                </Grid>       
-            </form>
+            <Row className="align-items-center" style={{height: '100vh'}}>
+                <Col md={{span: 6, offset: 3}}>
+                    <MyCard />
+                </Col>
+            </Row>
 
-            <Button 
-                variant="contained" 
-                color="secondary" 
-                className={classes.botao} 
-                startIcon={ <SearchIcon />}
-                onClick={handleClick}
-            >
-                Consultar
-            </Button>
-        </Grid>
-    </>
+        </Container>   
+    </div>
    )
 }
 
