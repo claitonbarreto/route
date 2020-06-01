@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import CepActions from '../actions/CepActions'
+import ErrorAction from '../actions/ErrorAction'
 import { TextField } from '@material-ui/core'
 
 //My imports
@@ -16,12 +17,14 @@ const CepField = ({id, label, value, ...props}) => {
         var validate = validations(e.target.value, 'cep')
         if(validate !== true) {
             setError(true)
-            setHelperErrorText(validate)
+            setHelperErrorText(validate.text)
+            props.dispatch(ErrorAction.setError(validate.text, validate.code))
         } 
 
         if(validate == true) {
             setError(false)
             setHelperErrorText('')
+            //TODO: passar o code como prop nao visual pro state global. No HandleClose pegar o code (id) e deletar todos os erros refs ao id
         }
     }
 

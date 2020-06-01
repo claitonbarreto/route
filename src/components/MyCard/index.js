@@ -16,6 +16,7 @@ import Header from './Header'
 import CepField from '../CepField'
 import FreteField from '../FreteField'
 import validations from './validations'
+import MyAlert from '../../components/MyAlert'
 
 const CardContent = styled.div`
     border: 3px solid #05a8aa;
@@ -68,16 +69,34 @@ const Text = styled.p`
     margin-bottom: 5px;
 `;
 
-const handleSend = (e) => {
-    console.log(store.getState())
-}
+
 
 const MyCard = () => {
 
+    const handleSend = (e) => {
+        var state = store.getState();
+        state.ErrorReducer.error.length > 0 ? setShowAlert(true) : setShowAlert(false) 
+    }
+
+    const handleCloseAlert = () => {
+        
+        setShowAlert(false)
+    }
+
+    const [showAlert, setShowAlert] = useState(false)
+
     return (
         <>
-            <Grid container xs={4} md={6} direction="row" justify="center">
+            <Grid container xs={4} md={6} direction="row" justify="center" alignItems="center">
+                
+                <MyAlert 
+                    showAlert={showAlert} 
+                    errors={store.getState().ErrorReducer.error} 
+                    handleClose={handleCloseAlert}
+                />
+
                 <Header title="Cálculo de frete" />
+                
                 <CardContent>
                             <CardForm>
                                 <MyTextInput>

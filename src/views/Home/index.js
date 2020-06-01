@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import { Grid } from '@material-ui/core'
+import { Grid, Paper } from '@material-ui/core'
 
 import store from '../../store/index'
 import routeStore from '../../@api/store/routeStore'
 
 import MyCard from '../../components/MyCard/index'
+import MyAlert from '../../components/MyAlert'
 
 //STYLED 
 import styled from 'styled-components'
@@ -15,7 +16,8 @@ const HomeGrid = styled.div`
     background-size: cover;
     background-position: auto;
     min-height: 100vh;
-`
+`;
+
 
 const Home = (props) => {
 
@@ -26,7 +28,8 @@ const Home = (props) => {
             spacing={0} 
             md={12} xs={6} 
             direction="row" 
-            justify="center" 
+            justify="center"
+            alignItems="center"
         >
             <MyCard />
         </Grid>

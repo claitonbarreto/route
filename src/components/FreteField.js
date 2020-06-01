@@ -15,11 +15,11 @@ const FreteField = (props) => {
     const [helperErrorText, setHelperErrorText] = useState('')
 
     const validateFrete = e => {
-        const validacao = validations(e.target.value, 'frete')
+        var validacao = validations(e.target.value, 'frete')
         if(validacao !== true) {
             setError(true)
-            setHelperErrorText(validacao)
-            props.dispatch(ErrorAction.setError(validacao, 221))
+            setHelperErrorText(validacao.text)
+            props.dispatch(ErrorAction.setError(validacao.text, validacao.code))
         }
 
         if(validacao == true) {

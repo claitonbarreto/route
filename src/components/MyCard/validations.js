@@ -12,14 +12,14 @@ const validations = (content, type) => {
 
 const cepValidate = (cep) => {
     
-    if(cep.length !== 8) return  "O Cep precisa conter 8 digitos!"
-    if(cep === "00000000") return  "O Cep está inválido!"
+    if(cep.length !== 8) return  {text: "O Cep precisa conter 8 digitos!", code: 1}
+    if(cep === "00000000") return  {text: "O Cep está inválido!", code: 2}
 
     return true
 }
 
 const freteValidate = (frete) => {
-    if(frete.indexOf('.') !== -1) return "A separação precisar ser com (,) - vírgola"
+    if(frete.indexOf('.') !== -1) return {text: "A separação precisar ser com (,) - vírgola", code: 3}
 
     return true
 }
