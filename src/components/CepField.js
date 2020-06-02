@@ -6,25 +6,25 @@ import { TextField } from '@material-ui/core'
 
 //My imports
 import validations from './MyCard/validations'
+import store from '../store/index'
 
 
 const CepField = ({id, label, value, ...props}) => {
 
     const [error, setError] = useState(false)
-    const [helperErrorText, setHelperErrorText] = useState('')
 
-    const cepValidate = (e) => {
-        var validate = validations(e.target.value, 'cep')
-        if(validate !== true) {
-            setError(true)
-            setHelperErrorText(validate.text)
-            props.dispatch(ErrorAction.setError(validate.text, validate.code))
-        } 
-
-        if(validate == true) {
+    const cepValidate = async (e) => {
+        
+        let cep = e.target.value
+        const validate = validations({cep, id}, 'cep')
+        console.log(props)
+        
+        if(validate.length === 0) {
+            props.dispatch(ErrorAction.clearError(id))
             setError(false)
-            setHelperErrorText('')
-            //TODO: passar o code como prop nao visual pro state global. No HandleClose pegar o code (id) e deletar todos os erros refs ao id
+        } else { 
+            props.dispatch(ErrorAction.setError(validate))
+            setError(true)
         }
     }
 
@@ -42,7 +42,7 @@ const CepField = ({id, label, value, ...props}) => {
                 label={label}
                 onChange={handleTextChange}
                 value={value}
-                helperText={helperErrorText !== '' ? helperErrorText : "Somente números"}
+                helperText={"Somente números"}
                 onBlur={cepValidate}
                 fullWidth
             />
@@ -52,4 +52,8 @@ const CepField = ({id, label, value, ...props}) => {
 
 }
 
-export default connect(store =>({cepOrigem: store.CepReducer.cepOrigem, cepDestino: store.CepReducer.cepDestino}))(CepField)
+export default connect(store => ({
+    cepOrigem: store.CepReducer.cepOrigem, 
+    cepDestino: store.CepReducer.cepDestino,
+    error: store.ErrorReducer.error
+}))(CepField)

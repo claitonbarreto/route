@@ -10,12 +10,18 @@ const validations = (content, type) => {
     }
 }
 
-const cepValidate = (cep) => {
-    
-    if(cep.length !== 8) return  {text: "O Cep precisa conter 8 digitos!", code: 1}
-    if(cep === "00000000") return  {text: "O Cep está inválido!", code: 2}
+const cepValidate = ({cep,id}) => {
 
-    return true
+    let errors = []
+    
+    if(cep.length !== 8) errors.push(`O CAMPO CEP ${id} PRECISA TER 8 CARACTERES`)
+    if(cep === "00000000") errors.push(`O CAMPO CEP ${id} ESTÁ INVÁLIDO`)
+
+    //console.log(errors)
+
+    if(errors === []) return true
+
+    return errors
 }
 
 const freteValidate = (frete) => {

@@ -75,6 +75,7 @@ const MyCard = () => {
 
     const handleSend = (e) => {
         var state = store.getState();
+        
         state.ErrorReducer.error.length > 0 ? setShowAlert(true) : setShowAlert(false) 
     }
 
