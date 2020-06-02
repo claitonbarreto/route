@@ -9,23 +9,23 @@ import validations from './MyCard/validations'
 
 
 
-const FreteField = (props) => {
+const FreteField = ({id, ...props}) => {
 
     const [error, setError] = useState(false)
     const [helperErrorText, setHelperErrorText] = useState('')
 
     const validateFrete = e => {
-        var validacao = validations(e.target.value, 'frete')
-        if(validacao !== true) {
-            setError(true)
-            setHelperErrorText(validacao.text)
-            props.dispatch(ErrorAction.setError(validacao.text, validacao.code))
-        }
 
-        if(validacao == true) {
+        let frete = e.target.value
+        const validate = validations({frete, id}, 'frete')
+        if(validate.length === 0) {
+            props.dispatch(ErrorAction.clearError(id))
             setError(false)
-            setHelperErrorText('')
+        } else {
+            props.dispatch(ErrorAction.setError(validate))
+            setError(true)
         }
+        
     }
 
     const handleFreteChange = e => {

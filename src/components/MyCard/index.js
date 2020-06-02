@@ -114,7 +114,7 @@ const MyCard = () => {
                                 </MyTextInput>
                                 <MyTextInput>
                                     <FreteField 
-
+                                        id="FRETE"
                                     />
                                 </MyTextInput>
                                 

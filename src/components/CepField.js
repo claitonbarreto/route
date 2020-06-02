@@ -17,7 +17,6 @@ const CepField = ({id, label, value, ...props}) => {
         
         let cep = e.target.value
         const validate = validations({cep, id}, 'cep')
-        console.log(props)
         
         if(validate.length === 0) {
             props.dispatch(ErrorAction.clearError(id))

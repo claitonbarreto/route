@@ -24,10 +24,15 @@ const cepValidate = ({cep,id}) => {
     return errors
 }
 
-const freteValidate = (frete) => {
-    if(frete.indexOf('.') !== -1) return {text: "A separação precisar ser com (,) - vírgola", code: 3}
+const freteValidate = ({frete, id}) => {
 
-    return true
+    let errors = []
+
+    if(frete.indexOf('.') !== -1) errors.push(`O CAMPO ${id} NÃO PODE CONTER PONTO (.)`)
+
+    if(errors === []) return true
+
+    return errors
 }
 
 export default validations
