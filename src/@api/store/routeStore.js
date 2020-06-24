@@ -1,8 +1,8 @@
 import apiConnection from '../apiConnection'
 
 const routeStore = {
-    getRoute: async () => {
-        return await apiConnection.get('route/25265080/25931686')
+    getRoute: async (cep_origem, cep_destino) => {
+        return await apiConnection.get(`route/${cep_origem}/${cep_destino}`)
     },
 
     getGeoCode: async () => {

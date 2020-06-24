@@ -14,6 +14,15 @@ const CardAlert = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    & .MuiPaper-root {
+        background-color: #FF1F39;
+    }
+    & .MuiAlert-message {
+        color: #fff;
+    }
+    & .MuiSvgIcon-root {
+        color: #fff;
+    }
 `;
 
 

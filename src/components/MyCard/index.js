@@ -10,6 +10,7 @@ import styled from 'styled-components'
 
 //STORE
 import store from '../../store/index'
+import routeStore from '../../@api/store/routeStore'
 
 //My components
 import Header from './Header'
@@ -17,6 +18,7 @@ import CepField from '../CepField'
 import FreteField from '../FreteField'
 import validations from './validations'
 import MyAlert from '../../components/MyAlert'
+import Wait from '../Wait'
 
 const CardContent = styled.div`
     border: 3px solid #05a8aa;
@@ -73,10 +75,26 @@ const Text = styled.p`
 
 const MyCard = () => {
 
+
+    useEffect(() => {
+       
+    })
+
     const handleSend = (e) => {
         var state = store.getState();
+
+        let cep_origem = state.CepReducer.cepOrigem
+        let cep_destino = state.CepReducer.cepDestino
         
         state.ErrorReducer.error.length > 0 ? setShowAlert(true) : setShowAlert(false) 
+
+        setBusy(true)
+        var promise = routeStore.getRoute(cep_origem, cep_destino)
+        promise.then(res => {
+            //TODO: ABRIR PAGINA RESULTADO 
+            console.log(res)
+            setBusy(false)
+        })
     }
 
     const handleCloseAlert = () => {
@@ -85,11 +103,12 @@ const MyCard = () => {
     }
 
     const [showAlert, setShowAlert] = useState(false)
+    const [busy, setBusy] = useState(false)
 
     return (
         <>
             <Grid container xs={4} md={6} direction="row" justify="center" alignItems="center">
-                
+                {busy && <Wait />}
                 <MyAlert 
                     showAlert={showAlert} 
                     errors={store.getState().ErrorReducer.error} 
