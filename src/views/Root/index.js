@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import Home from '../Home'
 import Users from '../Users'
+import RouteDetails from '../RouteDetails'
 
 const Root = () => {
     return (
@@ -18,6 +19,9 @@ const Root = () => {
                 </Route>
                 <Route path="/users">
                     <Users />
+                </Route>
+                <Route path="/route-details">
+                    <RouteDetails />
                 </Route>
             </Switch>
         </Router>

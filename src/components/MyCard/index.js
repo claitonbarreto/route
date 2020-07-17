@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 //MATERIAL-UI
 import { TextField, Button, InputAdornment, Grid } from '@material-ui/core'
@@ -11,6 +13,10 @@ import styled from 'styled-components'
 //STORE
 import store from '../../store/index'
 import routeStore from '../../@api/store/routeStore'
+
+//actions
+import RouteActions from '../../actions/RouteActions'
+import ErrorAction from '../../actions/ErrorAction'
 
 //My components
 import Header from './Header'
@@ -31,38 +37,6 @@ const CardContent = styled.div`
     background-color: white;
 `;
 
-const MyTextInput = styled.div`
-    margin: 5px 0px 20px 0px;
-    width: 100%;
-    & .Mui-focused {
-        color: #00696A
-    }
-    & .Mui-focused * {
-        color: #00696A
-    }
-    & label.Mui-focused {
-        color: #00696A;
-    }
-    & .MuiInput-underline:after {
-        border-bottom-color: #00696A
-    }
-`;
-
-const CardForm = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 15%;
-    margin-top: 80px;
-`;
-
-const MyButton = styled.div`
-    margin-top: 60px;
-    background-color: #ED6A5A;
-    border-radius: 10px;
-    & * {color: white;}
-`;
-
 const Text = styled.p`
     text-align: center;
     font-weight: 300;
@@ -73,29 +47,14 @@ const Text = styled.p`
 
 
 
-const MyCard = () => {
+const MyCard = ({headerText, cardWidth, children, ...props}) => {
 
 
     useEffect(() => {
        
     })
 
-    const handleSend = (e) => {
-        var state = store.getState();
-
-        let cep_origem = state.CepReducer.cepOrigem
-        let cep_destino = state.CepReducer.cepDestino
-        
-        state.ErrorReducer.error.length > 0 ? setShowAlert(true) : setShowAlert(false) 
-
-        setBusy(true)
-        var promise = routeStore.getRoute(cep_origem, cep_destino)
-        promise.then(res => {
-            //TODO: ABRIR PAGINA RESULTADO 
-            console.log(res)
-            setBusy(false)
-        })
-    }
+    
 
     const handleCloseAlert = () => {
         
@@ -104,51 +63,28 @@ const MyCard = () => {
 
     const [showAlert, setShowAlert] = useState(false)
     const [busy, setBusy] = useState(false)
+    const [redirect, setRedirect] = useState(false)
 
     return (
         <>
-            <Grid container xs={4} md={6} direction="row" justify="center" alignItems="center">
-                {busy && <Wait />}
+            {props.redirect && (
+                <Redirect to="/route-details" />
+            )}
+            <Grid container xs={cardWidth} direction="row" justify="center" alignItems="center">
+                {props.busy && <Wait />}
                 <MyAlert 
                     showAlert={showAlert} 
                     errors={store.getState().ErrorReducer.error} 
                     handleClose={handleCloseAlert}
                 />
 
-                <Header title="Cálculo de frete" />
+                <Header title={headerText} />
                 
                 <CardContent>
-                            <CardForm>
-                                <MyTextInput>
-                                    <CepField 
-                                        id="ORIGEM"
-                                        label="CEP de Origem"
-                                    />
-                                </MyTextInput>
-                                <MyTextInput>
-                                    <CepField 
-                                        id="DESTINO"
-                                        label="CEP de Destino"
-                                    />
-                                </MyTextInput>
-                                <MyTextInput>
-                                    <FreteField 
-                                        id="FRETE"
-                                    />
-                                </MyTextInput>
-                                
-                                <MyButton>
-                                    <Button
-                                        endIcon={<ArrowForwardIosIcon />}
-                                        onClick={handleSend}
-                                    >
-                                        Calcular
-                                    </Button>
-                                </MyButton>
-                            </CardForm>
-                    </CardContent>
+                    {children}           
+                </CardContent>
             </Grid>
-            <Grid xs={12} style={{marginTop: '20px'}}>
+            {props.suggest && <Grid xs={12} style={{marginTop: '20px'}}>
                 <Text>Alguma sugestão ou reclamação? Não de acanhe, me envie um e-mail:</Text>
                 <a href="#">
                     <Text color="#ED6A5A">
@@ -156,10 +92,14 @@ const MyCard = () => {
                         claitonbarreto@gmail.com
                     </Text>
                 </a>
-            </Grid>
+            </Grid>}
         </>
     )
 }
 
 
-export default MyCard;
+
+export default connect(store => ({
+    error: store.ErrorReducer.error,
+    data: store.RouteReducer.data
+}))(MyCard)
