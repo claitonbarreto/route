@@ -12,6 +12,7 @@ import CepField from '../../components/CepField'
 import FreteField from '../../components/FreteField'
 import RouteActions from '../../actions/RouteActions'
 import AlertAction from '../../actions/AlertAction'
+import FreteAction from '../../actions/FreteAction'
 
 //STYLED 
 import styled from 'styled-components'
@@ -85,9 +86,8 @@ const Home = (props) => {
             var promise = routeStore.getRoute(cep_origem, cep_destino)
             promise.then(res => {
                 //TODO: ABRIR PAGINA RESULTADO 
-                console.log(res.data)
                 props.dispatch(RouteActions.setRoute(res.data))
-                console.log(props)
+                props.dispatch(FreteAction.setFrete(props.frete))
                 setRedirect(true)
             })
     
@@ -141,4 +141,8 @@ const Home = (props) => {
    )
 }
 
-export default connect(store => ({cepOrigem: store.CepReducer.cepOrigem, cepDestino: store.CepReducer.cepDestino}))(Home)
+export default connect(store => ({
+    cepOrigem: store.CepReducer.cepOrigem,
+    cepDestino: store.CepReducer.cepDestino,
+    frete: store.FreteReducer.frete
+}))(Home)
