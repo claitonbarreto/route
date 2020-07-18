@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import { Paper } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab'
+import {connect} from 'react-redux'
+import store from '../store/index'
 
 const CardAlert = styled.div`
     position: absolute;
@@ -26,13 +28,15 @@ const CardAlert = styled.div`
 `;
 
 
-const MyAlert = ({showAlert, errors, ...props}) => {
+const MyAlert = ({errors, ...props}) => {
     
     const handleClose = () => {
         props.handleClose()
     }
 
-    {if(showAlert === true) {
+    useEffect(() => console.log(props.showAlert))
+
+    {if(props.showAlert === true) {
         return (
             <CardAlert>
                 <Alert 
@@ -49,4 +53,6 @@ const MyAlert = ({showAlert, errors, ...props}) => {
     } else return null}
 }
 
-export default MyAlert;
+export default connect(store => ({
+    showAlert: store.AlertReducer.showAlert
+}))(MyAlert)
