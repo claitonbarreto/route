@@ -17,6 +17,7 @@ import routeStore from '../../@api/store/routeStore'
 //actions
 import RouteActions from '../../actions/RouteActions'
 import ErrorAction from '../../actions/ErrorAction'
+import AlertAction from '../../actions/AlertAction'
 
 //My components
 import Header from './Header'
@@ -58,10 +59,9 @@ const MyCard = ({headerText, cardWidth, children, ...props}) => {
 
     const handleCloseAlert = () => {
         
-        setShowAlert(false)
+        props.dispatch(AlertAction.setShowAlert(false))
     }
 
-    const [showAlert, setShowAlert] = useState(false)
     const [busy, setBusy] = useState(false)
     const [redirect, setRedirect] = useState(false)
 
@@ -73,7 +73,6 @@ const MyCard = ({headerText, cardWidth, children, ...props}) => {
             <Grid container xs={cardWidth} direction="row" justify="center" alignItems="center">
                 {props.busy && <Wait />}
                 <MyAlert 
-                    showAlert={showAlert} 
                     errors={store.getState().ErrorReducer.error} 
                     handleClose={handleCloseAlert}
                 />

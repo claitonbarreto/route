@@ -11,6 +11,7 @@ import MyAlert from '../../components/MyAlert'
 import CepField from '../../components/CepField'
 import FreteField from '../../components/FreteField'
 import RouteActions from '../../actions/RouteActions'
+import AlertAction from '../../actions/AlertAction'
 
 //STYLED 
 import styled from 'styled-components'
@@ -20,6 +21,9 @@ const HomeGrid = styled.div`
     background-size: cover;
     background-position: auto;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const MyTextInput = styled.div`
@@ -64,6 +68,7 @@ const Home = (props) => {
     const [redirect, setRedirect] = useState(false)
 
     const handleSend = (e) => {
+        console.log(props)
         var state = store.getState();
     
         let cep_origem = state.CepReducer.cepOrigem
@@ -71,8 +76,10 @@ const Home = (props) => {
         
         if(state.ErrorReducer.error.length > 0) {
             setShowAlert(true)
+            props.dispatch(AlertAction.setShowAlert(true))
         } else {
             setShowAlert(false) 
+            props.dispatch(AlertAction.setShowAlert(false))
     
             setBusy(true)
             var promise = routeStore.getRoute(cep_origem, cep_destino)
@@ -94,12 +101,12 @@ const Home = (props) => {
         <Grid
             container
             spacing={0} 
-            md={12} xs={6} 
+            md={6} xs={12} 
             direction="row" 
             justify="center"
             alignItems="center"
         >
-            <MyCard redirect={redirect} busy={busy} suggest>
+            <MyCard headerText="Calcule sua rota" redirect={redirect} busy={busy} suggest>
             <CardForm>
                 <MyTextInput>
                     <CepField 
