@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 
 const HeaderContent = styled.div`
-    background-color: #05a8aa;
+    background-color: ${props => props.color};
     border-radius: 10px;
     width: 60%;
     text-align: center;
@@ -16,9 +16,9 @@ const Title = styled.h1`
     font-size: 27pt;
 `;
 
-const Header = ({title}) => {
+const Header = ({title, ...props}) => {
     return(
-        <HeaderContent>
+        <HeaderContent color={props.color}>
             <Title>{title}</Title>
         </HeaderContent>
     )

@@ -8,9 +8,9 @@ export const lightTheme = {
 }
 
 export const darkTheme = {
-    body: '#444444',
+    body: '#3D3D3D',
     shadowColor: '#777',
-    cardBackground: '#3D3D3D',
+    cardBackground: '#444',
     labelColor: '#fff',
     inputUnderlineColor: 'rgba(255,255,255,.42)',
     inputLabel: 'rgba(255,255,255,.54)'

@@ -28,10 +28,10 @@ import MyAlert from '../../components/MyAlert'
 import Wait from '../Wait'
 
 const CardContent = styled.div`
-    border: 3px solid #05A8AA;
+    border: ${props => `3px solid ${props.cardColor}`};
     border-radius: 10px;
     width: 80%;
-    box-shadow: ${({theme}) => '0px 0px 5px' + theme.shadowColor};
+    box-shadow: ${({theme, shadow}) => shadow ? '0px 0px 5px' + theme.shadowColor : ''};
     height: auto;
     margin-top: -25px;
     padding: 25px;
@@ -48,7 +48,7 @@ const Text = styled.p`
 
 
 
-const MyCard = ({headerText, cardWidth, children, ...props}) => {
+const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
 
 
     useEffect(() => {
@@ -77,9 +77,9 @@ const MyCard = ({headerText, cardWidth, children, ...props}) => {
                     handleClose={handleCloseAlert}
                 />
 
-                <Header title={headerText} />
+                <Header title={headerText} color={props.cardColor}/>
                 
-                <CardContent>
+                <CardContent cardColor={props.cardColor} shadow={shadow}>
                     {children}           
                 </CardContent>
             </Grid>

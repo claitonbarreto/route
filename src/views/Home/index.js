@@ -141,7 +141,7 @@ const Home = (props) => {
             justify="center"
             alignItems="center"
         >
-            <MyCard headerText="Calcule sua rota" redirect={redirect} busy={busy} suggest>
+            <MyCard shadow cardColor="#05A8AA" headerText="Calcule sua rota" redirect={redirect} busy={busy} suggest>
             <CardForm>
                 <MyTextInput>
                     <CepField 

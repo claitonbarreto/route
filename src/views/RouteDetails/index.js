@@ -45,6 +45,7 @@ const RouteDetails = ({data, frete}) => {
                         <MyCard
                             headerText="Endereços Encontrados"
                             cardWidth={6}
+                            cardColor="#3ACECF"
                         >
                             <Grid container>
                                 <Grid item md={6} style={{width: '100%', borderRight: '1px solid #ddd'}}>
@@ -62,6 +63,7 @@ const RouteDetails = ({data, frete}) => {
                         <MyCard
                             headerText="Detalhes da rota"
                             cardWidth={6}
+                            cardColor="#EC897D"
                         >
                             <Grid container>
                                 <Grid item md style={{width: '100%'}}>
