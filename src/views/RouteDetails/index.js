@@ -37,9 +37,9 @@ const RouteDetails = ({data, frete}) => {
         {data.length === 0 ? (
             <Redirect to="/" />
         ) : (
-            <Grid container spacing={2} style={{border: '1px solid blue', minHeight: '100vh', paddingTop: '15px'}}>
+            <Grid container spacing={2} style={{minHeight: '100vh', paddingTop: '15px'}}>
 
-            <Grid container justify="center" style={{border: '1px solid red'}}>
+            <Grid container justify="center">
                 <Grid item xs={12} style={{marginBottom: '50px'}}>
                     <Grid container justify="center">
                         <MyCard
