@@ -28,22 +28,22 @@ import MyAlert from '../../components/MyAlert'
 import Wait from '../Wait'
 
 const CardContent = styled.div`
-    border: 3px solid #05a8aa;
+    border: 3px solid #05A8AA;
     border-radius: 10px;
     width: 80%;
-    box-shadow: 0px 0px 5px black;
+    box-shadow: ${({theme}) => '0px 0px 5px' + theme.shadowColor};
     height: auto;
     margin-top: -25px;
     padding: 25px;
-    background-color: white;
+    background-color: ${({theme}) => theme.cardBackground};
 `;
 
 const Text = styled.p`
     text-align: center;
-    font-weight: 300;
     font-size: 12pt;
-    color: ${props => props.color};
+    color: ${props => props.color ? props.color : ({theme}) => theme.inputLabel};
     margin-bottom: 5px;
+    font-weight: 500;
 `;
 
 

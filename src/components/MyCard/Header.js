@@ -14,7 +14,6 @@ const HeaderContent = styled.div`
 const Title = styled.h1`
     color: white;
     font-size: 27pt;
-    font-weight: 300;
 `;
 
 const Header = ({title}) => {

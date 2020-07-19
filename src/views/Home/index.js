@@ -13,6 +13,7 @@ import FreteField from '../../components/FreteField'
 import RouteActions from '../../actions/RouteActions'
 import AlertAction from '../../actions/AlertAction'
 import FreteAction from '../../actions/FreteAction'
+import ThemeAction from '../../actions/ThemeAction'
 
 //STYLED 
 import styled from 'styled-components'
@@ -30,6 +31,27 @@ const HomeGrid = styled.div`
 const MyTextInput = styled.div`
     margin: 5px 0px 20px 0px;
     width: 100%;
+
+    & .MuiInput-underline:before {
+        border-bottom: ${({theme}) => `1px solid ${theme.inputUnderlineColor}`}
+    }
+
+    & .MuiFormLabel-root {
+        color: ${({theme}) => theme.inputLabel};
+    }
+
+    & .MuiFormHelperText-root {
+        color: ${({theme}) => theme.inputLabel}
+    }
+
+    & .MuiTypography-colorTextSecondary {
+        color: ${({theme}) => theme.inputLabel}
+    }
+
+    & .MuiInputBase-input {
+        color: ${({theme}) => theme.inputLabel}
+    }
+    
     & .Mui-focused {
         color: #00696A
     }
@@ -68,6 +90,16 @@ const Home = (props) => {
     const [busy, setBusy] = useState(false)
     const [redirect, setRedirect] = useState(false)
 
+    const toggleTheme = () => {
+        let tema = props.tema
+        console.log(tema)
+        if(tema === 'light') {
+            props.dispatch(ThemeAction.setTheme('dark'))
+        } else {
+            props.dispatch(ThemeAction.setTheme('light'))
+        }
+    }
+
     const handleSend = (e) => {
         console.log(props)
         var state = store.getState();
@@ -98,10 +130,13 @@ const Home = (props) => {
 
    return (
     <HomeGrid imageUrl={process.env.PUBLIC_URL+'back.png'}>
+        <Button onClick={toggleTheme}>
+            Mudar Tema
+        </Button>
         <Grid
             container
             spacing={0} 
-            md={6} xs={12} 
+            md={5} xs={12} 
             direction="row" 
             justify="center"
             alignItems="center"
@@ -144,5 +179,6 @@ const Home = (props) => {
 export default connect(store => ({
     cepOrigem: store.CepReducer.cepOrigem,
     cepDestino: store.CepReducer.cepDestino,
-    frete: store.FreteReducer.frete
+    frete: store.FreteReducer.frete,
+    tema: store.ThemeReducer.theme
 }))(Home)
