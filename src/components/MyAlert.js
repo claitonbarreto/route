@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import { Paper } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab'
 import {connect} from 'react-redux'
+import ErrorAction from '../actions/ErrorAction'
 import store from '../store/index'
+import { Animated } from 'react-animated-css'
 
 const CardAlert = styled.div`
     position: absolute;
@@ -25,6 +27,10 @@ const CardAlert = styled.div`
     & .MuiSvgIcon-root {
         color: #fff;
     }
+
+    * {
+        font-weight: bold;
+    }
 `;
 
 
@@ -34,25 +40,28 @@ const MyAlert = ({errors, ...props}) => {
         props.handleClose()
     }
 
-    useEffect(() => console.log(props.showAlert))
+    useEffect(() => console.log(errors))
 
     {if(props.showAlert === true) {
         return (
             <CardAlert>
-                <Alert 
-                    severity="error"
-                    onClose={handleClose}
-                >
-                    <AlertTitle>Erro!</AlertTitle>
-                    {errors.map((err, key) => {
-                        return <p key={key}> {err.error}, <strong>code: {err.code}</strong> </p>
-                    })}
-                </Alert>
+                <Animated animationIn="flipInX" animationOut="flipOutX" animationInDuration={800}>
+                    <Alert 
+                        severity="error"
+                        onClose={handleClose}
+                    >
+                        <AlertTitle>Erro!</AlertTitle>
+                        {props.error.map((err, key) => {
+                            return <p key={key}> {err.error}, <strong>code: {err.code}</strong> </p>
+                        })}
+                    </Alert>
+                </Animated>
             </CardAlert>
         )
     } else return null}
 }
 
 export default connect(store => ({
-    showAlert: store.AlertReducer.showAlert
+    showAlert: store.AlertReducer.showAlert,
+    error: store.ErrorReducer.error
 }))(MyAlert)

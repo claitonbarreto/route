@@ -37,7 +37,7 @@ const RouteDetails = ({data, frete}) => {
         {data.length === 0 ? (
             <Redirect to="/" />
         ) : (
-            <Grid container spacing={2}>
+            <Grid container spacing={2} style={{minHeight: '100vh', paddingTop: '15px'}}>
 
             <Grid container justify="center">
                 <Grid item xs={12} style={{marginBottom: '50px'}}>
@@ -45,6 +45,7 @@ const RouteDetails = ({data, frete}) => {
                         <MyCard
                             headerText="Endereços Encontrados"
                             cardWidth={6}
+                            cardColor="#3ACECF"
                         >
                             <Grid container>
                                 <Grid item md={6} style={{width: '100%', borderRight: '1px solid #ddd'}}>
@@ -62,6 +63,7 @@ const RouteDetails = ({data, frete}) => {
                         <MyCard
                             headerText="Detalhes da rota"
                             cardWidth={6}
+                            cardColor="#EC897D"
                         >
                             <Grid container>
                                 <Grid item md style={{width: '100%'}}>
@@ -74,7 +76,7 @@ const RouteDetails = ({data, frete}) => {
                 <Grid item xs={6}>
                     <Grid container justify="flex-start">
                         <Grid item xs={4}>
-                            <h2>Recalcular Frete</h2>
+                            <BigText>Recalcular Frete</BigText>
                             <FreteField 
                                 id="FRETE"
                             />
@@ -100,24 +102,38 @@ const RouteDetails = ({data, frete}) => {
     )
 }
 
+//ED6A5A
+
+const TextDestak = styled.label`
+    color: ${({color}) => color};
+    font-weight: 300;
+`
+
+const TextLabel = styled.label`
+    color: ${({theme}) => theme.labelColor};
+`
+const BigText = styled(TextLabel)`
+    font-size: 2em;
+`
+
 const AdressDetails = ({data}) => {
     return (
         <>
             <MyFlexGrid direction="row">
-                <label>Origem</label>
-                <label>{data.dataCep.cep}</label>
+                <TextDestak color="#ED6A5A">Origem</TextDestak>
+                <TextLabel>{data.dataCep.cep}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">
-                <label>Logradouro</label>
-                <label>{data.dataCep.logradouro}</label>
+                <TextDestak color="#ED6A5A">Logradouro</TextDestak>
+                <TextLabel>{data.dataCep.logradouro}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">
-                <label>Bairro</label>
-                <label>{data.dataCep.bairro}</label>
+                <TextDestak color="#ED6A5A">Bairro</TextDestak>
+                <TextLabel>{data.dataCep.bairro}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">
-                <label>Cidade</label>
-                <label>{data.dataCep.localidade}</label>
+                <TextDestak color="#ED6A5A">Cidade</TextDestak>
+                <TextLabel>{data.dataCep.localidade}</TextLabel>
             </MyFlexGrid>
         </>
     )
@@ -158,16 +174,16 @@ const RouteDetailsCard = ({data, frete}) => {
     return (
         <>
             <MyFlexGrid direction="row">
-                <label>Distancia</label>
-                <label>{getDistance()}</label>
+                <TextDestak color="#05A8AA">Distância</TextDestak>
+                <TextLabel>{getDistance()}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">
-                <label>Tempo previsto</label>
-                <label>{getMinutes()}</label>
+                <TextDestak color="#05A8AA">Tempo Previsto</TextDestak>
+                <TextLabel>{getMinutes()}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">
-                <label>Frete</label>
-                <label>{getFrete()}</label>
+                <TextDestak color="#05A8AA">Frete</TextDestak>
+                <TextLabel>{getFrete()}</TextLabel>
             </MyFlexGrid>
         </>
     )

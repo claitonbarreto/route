@@ -28,42 +28,33 @@ import MyAlert from '../../components/MyAlert'
 import Wait from '../Wait'
 
 const CardContent = styled.div`
-    border: 3px solid #05a8aa;
+    border: ${props => `3px solid ${props.cardColor}`};
     border-radius: 10px;
     width: 80%;
-    box-shadow: 0px 0px 5px black;
+    box-shadow: ${({theme, shadow}) => shadow ? '0px 0px 5px' + theme.shadowColor : ''};
     height: auto;
     margin-top: -25px;
     padding: 25px;
-    background-color: white;
+    background-color: ${({theme}) => theme.cardBackground};
 `;
 
 const Text = styled.p`
     text-align: center;
-    font-weight: 300;
     font-size: 12pt;
-    color: ${props => props.color};
+    color: ${props => props.color ? props.color : ({theme}) => theme.inputLabel};
     margin-bottom: 5px;
+    font-weight: 500;
 `;
 
 
 
-const MyCard = ({headerText, cardWidth, children, ...props}) => {
-
-
-    useEffect(() => {
-       
-    })
-
+const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
     
 
     const handleCloseAlert = () => {
-        
         props.dispatch(AlertAction.setShowAlert(false))
+        props.dispatch(ErrorAction.clearError('dados'))
     }
-
-    const [busy, setBusy] = useState(false)
-    const [redirect, setRedirect] = useState(false)
 
     return (
         <>
@@ -71,15 +62,12 @@ const MyCard = ({headerText, cardWidth, children, ...props}) => {
                 <Redirect to="/route-details" />
             )}
             <Grid container xs={cardWidth} direction="row" justify="center" alignItems="center">
-                {props.busy && <Wait />}
-                <MyAlert 
-                    errors={store.getState().ErrorReducer.error} 
-                    handleClose={handleCloseAlert}
-                />
-
-                <Header title={headerText} />
                 
-                <CardContent>
+               
+
+                <Header title={headerText} color={props.cardColor}/>
+                
+                <CardContent cardColor={props.cardColor} shadow={shadow}>
                     {children}           
                 </CardContent>
             </Grid>

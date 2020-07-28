@@ -13,6 +13,9 @@ import FreteField from '../../components/FreteField'
 import RouteActions from '../../actions/RouteActions'
 import AlertAction from '../../actions/AlertAction'
 import FreteAction from '../../actions/FreteAction'
+import ThemeAction from '../../actions/ThemeAction'
+import ErrorAction from '../../actions/ErrorAction'
+import Wait from '../../components/Wait'
 
 //STYLED 
 import styled from 'styled-components'
@@ -30,6 +33,27 @@ const HomeGrid = styled.div`
 const MyTextInput = styled.div`
     margin: 5px 0px 20px 0px;
     width: 100%;
+
+    & .MuiInput-underline:before {
+        border-bottom: ${({theme}) => `1px solid ${theme.inputUnderlineColor}`}
+    }
+
+    & .MuiFormLabel-root {
+        color: ${({theme}) => theme.inputLabel};
+    }
+
+    & .MuiFormHelperText-root {
+        color: ${({theme}) => theme.inputLabel}
+    }
+
+    & .MuiTypography-colorTextSecondary {
+        color: ${({theme}) => theme.inputLabel}
+    }
+
+    & .MuiInputBase-input {
+        color: ${({theme}) => theme.inputLabel}
+    }
+    
     & .Mui-focused {
         color: #00696A
     }
@@ -64,49 +88,81 @@ const MyButton = styled.div`
 
 const Home = (props) => {
 
-    const [showAlert, setShowAlert] = useState(false)
     const [busy, setBusy] = useState(false)
     const [redirect, setRedirect] = useState(false)
 
-    const handleSend = (e) => {
+    useEffect(() => console.log(props), [])
+
+    const toggleTheme = () => {
+        let tema = props.tema
         console.log(props)
+        if(tema === 'light') {
+            props.dispatch(ThemeAction.setTheme('dark'))
+        } else {
+            props.dispatch(ThemeAction.setTheme('light'))
+        }
+    }
+
+    const handleCloseAlert = () => {
+        props.dispatch(AlertAction.setShowAlert(false))
+        props.dispatch(ErrorAction.clearError('dados'))
+    }
+
+    const handleSend = (e) => {
         var state = store.getState();
     
         let cep_origem = state.CepReducer.cepOrigem
         let cep_destino = state.CepReducer.cepDestino
         
-        if(state.ErrorReducer.error.length > 0) {
-            setShowAlert(true)
-            props.dispatch(AlertAction.setShowAlert(true))
-        } else {
-            setShowAlert(false) 
+         if(state.ErrorReducer.error.length > 0) {
+
+             props.dispatch(AlertAction.setShowAlert(true))
+        
+         } else {
+    
             props.dispatch(AlertAction.setShowAlert(false))
     
             setBusy(true)
             var promise = routeStore.getRoute(cep_origem, cep_destino)
             promise.then(res => {
+                if(res.data.error) {
+                    props.dispatch(ErrorAction.setError([res.data.message]))
+                    props.dispatch(AlertAction.setShowAlert(true))
+                    return
+                }
                 //TODO: ABRIR PAGINA RESULTADO 
+                props.dispatch(ErrorAction.clearError())
                 props.dispatch(RouteActions.setRoute(res.data))
                 props.dispatch(FreteAction.setFrete(props.frete))
                 setRedirect(true)
             })
     
             promise.finally(() => {setBusy(false)})
-        }    
+         }    
         
     }
 
    return (
     <HomeGrid imageUrl={process.env.PUBLIC_URL+'back.png'}>
+        {busy && <Wait />}
+        <MyAlert 
+            errors={props.errors}
+            handleClose={handleCloseAlert}
+        />
+        <ThemeButtonStyle>
+            <Button onClick={toggleTheme}>
+                Mudar Tema
+            </Button>
+        </ThemeButtonStyle>
         <Grid
             container
             spacing={0} 
-            md={6} xs={12} 
+            md={5} xs={12} 
             direction="row" 
             justify="center"
             alignItems="center"
-        >
-            <MyCard headerText="Calcule sua rota" redirect={redirect} busy={busy} suggest>
+        >   
+            <MyCard shadow cardColor="#05A8AA" headerText="Calcule sua rota" redirect={redirect} suggest>
             <CardForm>
                 <MyTextInput>
                     <CepField 
@@ -141,8 +197,19 @@ const Home = (props) => {
    )
 }
 
+const ThemeButtonStyle = styled.div`
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: auto;
+    height: auto;
+    border: 1px solid red;
+`
+
 export default connect(store => ({
     cepOrigem: store.CepReducer.cepOrigem,
     cepDestino: store.CepReducer.cepDestino,
-    frete: store.FreteReducer.frete
+    frete: store.FreteReducer.frete,
+    tema: store.ThemeReducer.theme,
+    errors: store.ErrorReducer.errors
 }))(Home)
