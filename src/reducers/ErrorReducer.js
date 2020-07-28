@@ -1,5 +1,6 @@
 const initialState = {
-    error: []
+    error: [],
+    apiError: []
 }
 
 export default (state = initialState, action) => {
@@ -8,6 +9,7 @@ export default (state = initialState, action) => {
             return {...state, error: [...state.error, action.payload]}
         case 'CLEAR_ERROR':
             return {...state, error: state.error.filter(value => {
+                console.log(value)
                 return !value.error[0].includes(action.payload)
             })}
         default:

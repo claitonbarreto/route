@@ -49,21 +49,12 @@ const Text = styled.p`
 
 
 const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
-
-
-    useEffect(() => {
-       
-    })
-
     
 
     const handleCloseAlert = () => {
-        
         props.dispatch(AlertAction.setShowAlert(false))
+        props.dispatch(ErrorAction.clearError('dados'))
     }
-
-    const [busy, setBusy] = useState(false)
-    const [redirect, setRedirect] = useState(false)
 
     return (
         <>
@@ -71,11 +62,8 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
                 <Redirect to="/route-details" />
             )}
             <Grid container xs={cardWidth} direction="row" justify="center" alignItems="center">
-                {props.busy && <Wait />}
-                <MyAlert 
-                    errors={store.getState().ErrorReducer.error} 
-                    handleClose={handleCloseAlert}
-                />
+                
+               
 
                 <Header title={headerText} color={props.cardColor}/>
                 
