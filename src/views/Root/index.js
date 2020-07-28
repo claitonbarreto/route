@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import {
     BrowserRouter as Router,
     Switch,
@@ -8,25 +9,35 @@ import {
 import Home from '../Home'
 import Users from '../Users'
 import RouteDetails from '../RouteDetails'
+import ThemeReducer from '../../reducers/ThemeReducer'
+import { ThemeProvider } from 'styled-components'
+import { lightTheme, darkTheme } from '../../theme'
+import GlobalTheme from '../../globalStyle'
 
-const Root = () => {
+const Root = (props) => {
+
+
     return (
-
-        <Router>
-            <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/users">
-                    <Users />
-                </Route>
-                <Route path="/route-details">
-                    <RouteDetails />
-                </Route>
-            </Switch>
-        </Router>
+        <ThemeProvider theme={props.theme === 'light' ? lightTheme : darkTheme}>
+            <GlobalTheme />
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                    <Route path="/users">
+                        <Users />
+                    </Route>
+                    <Route path="/route-details">
+                        <RouteDetails />
+                    </Route>
+                </Switch>
+            </Router>
+        </ThemeProvider>
             
     )
 }
 
-export default Root
+export default connect(store => ({
+    theme: store.ThemeReducer.theme
+}))(Root)
