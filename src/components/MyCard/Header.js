@@ -4,9 +4,9 @@ import styled from 'styled-components'
 
 
 const HeaderContent = styled.div`
-    background-color: ${props => props.color};
+    background-color: ${({theme, themeColor, color}) => themeColor === 'light' ? color : theme.cardHeader};
     border-radius: 10px;
-    width: 60%;
+    width: 90%;
     text-align: center;
     z-index: 2;
 `;
@@ -19,7 +19,7 @@ const Title = styled.h1`
 
 const Header = ({title, ...props}) => {
     return(
-        <HeaderContent color={props.color}>
+        <HeaderContent color={props.color} themeColor={props.themeColor}>
             <Title>{title}</Title>
         </HeaderContent>
     )

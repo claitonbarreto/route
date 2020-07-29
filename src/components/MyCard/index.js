@@ -28,12 +28,11 @@ import MyAlert from '../../components/MyAlert'
 import Wait from '../Wait'
 
 const CardContent = styled.div`
-    border: ${props => `3px solid ${props.cardColor}`};
     border-radius: 10px;
-    width: 80%;
-    box-shadow: ${({theme, shadow}) => shadow ? '0px 0px 5px' + theme.shadowColor : ''};
+    width: 100%;
+    box-shadow: 0px 0px 5px #444;
     height: auto;
-    margin-top: -25px;
+    margin-top: -35px;
     padding: 25px;
     background-color: ${({theme}) => theme.cardBackground};
 `;
@@ -65,7 +64,7 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
                 
                
 
-                <Header title={headerText} color={props.cardColor}/>
+                <Header title={headerText} color={props.cardColor} themeColor={props.themeColor}/>
                 
                 <CardContent cardColor={props.cardColor} shadow={shadow}>
                     {children}           
@@ -88,5 +87,6 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
 
 export default connect(store => ({
     error: store.ErrorReducer.error,
-    data: store.RouteReducer.data
+    data: store.RouteReducer.data,
+    themeColor: store.ThemeReducer.theme
 }))(MyCard)

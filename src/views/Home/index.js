@@ -56,16 +56,16 @@ const MyTextInput = styled.div`
     }
     
     & .Mui-focused {
-        color: #00696A
+        color: ${({theme}) => theme.selectedInputColor}
     }
     & .Mui-focused * {
-        color: #00696A
+        color: ${({theme}) => theme.selectedInputColor}
     }
     & label.Mui-focused {
-        color: #00696A;
+        color: ${({theme}) => theme.selectedInputColor}
     }
     & .MuiInput-underline:after {
-        border-bottom-color: #00696A
+        border-bottom-color: ${({theme}) => theme.selectedInputColor}
     }
 `;
 
@@ -79,7 +79,7 @@ const CardForm = styled.div`
 
 const MyButton = styled.div`
     margin-top: 60px;
-    background-color: #ED6A5A;
+    background-color: ${({theme}) => theme.buttonColor};
     border-radius: 10px;
     & * {color: white;}
 `;
@@ -91,20 +91,6 @@ const Home = (props) => {
 
     const [busy, setBusy] = useState(false)
     const [redirect, setRedirect] = useState(false)
-
-    useEffect(
-        () => {
-            localStorage.setItem('theme', props.tema)
-        }, [props.tema]
-    )
-
-    const toggleTheme = () => {
-        if(props.tema === 'light') {
-            props.dispatch(ThemeAction.setTheme('dark')) 
-            return
-        }
-        props.dispatch(ThemeAction.setTheme('light'))
-    }
 
     const handleCloseAlert = () => {
         props.dispatch(AlertAction.setShowAlert(false))
@@ -151,10 +137,6 @@ const Home = (props) => {
             errors={props.errors}
             handleClose={handleCloseAlert}
         />
-        <DarkModeInterruptor 
-            theme={props.tema}
-            toggleTheme={toggleTheme}
-        />
         <Grid
             container
             spacing={0} 
@@ -163,7 +145,15 @@ const Home = (props) => {
             justify="center"
             alignItems="center"
         >   
-            <MyCard shadow cardColor="#05A8AA" headerText="Calcule sua rota" redirect={redirect} suggest>
+            <MyCard 
+                shadow
+                suggest  
+                cardColor="#05A8AA" 
+                headerText="Calcule sua rota" 
+                redirect={redirect} 
+                themeColor={props.tema}
+                cardWidth={7}
+            >
             <CardForm>
                 <MyTextInput>
                     <CepField 
