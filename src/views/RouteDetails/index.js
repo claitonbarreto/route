@@ -17,6 +17,7 @@ import FreteField from '../../components/FreteField'
 import store from '../../store/index'
 
 
+
 const MyGrid = styled.div`
     display: flex;
     justify-content: center;
@@ -31,74 +32,72 @@ const MyButton = styled.div`
 `;
 
 const RouteDetails = ({data, frete}) => {
-    
+
     return (
         <>
         {data.length === 0 ? (
             <Redirect to="/" />
         ) : (
-            <Grid container spacing={2} style={{minHeight: '100vh', paddingTop: '15px'}}>
-
-            <Grid container justify="center">
-                <Grid item xs={12} style={{marginBottom: '50px'}}>
-                    <Grid container justify="center">
-                        <MyCard
-                            headerText="Endereços Encontrados"
-                            cardWidth={6}
-                            cardColor="#3ACECF"
-                        >
-                            <Grid container>
-                                <Grid item md={6} style={{width: '100%', borderRight: '1px solid #ddd'}}>
-                                    <AdressDetails data={data.origem} target="Origem"/>
-                                </Grid>
-                                <Grid item md={6} style={{width: '100%'}}>
-                                    <AdressDetails data={data.destino} target="Destino"/>
-                                </Grid>
-                            </Grid>
-                        </MyCard>
-                    </Grid>
-                </Grid>
-                <Grid container justify="center">
-                    <Grid item xs={4}>
+            <Grid container justify="center" alignItems="center" style={{minHeight: '100vh'}}>
+                <Grid item xs={7} direction="column">
+                    <Grid item xs={12}>
                         <Grid container justify="center">
                             <MyCard
-                                headerText="Detalhes da rota"
-                                cardWidth={8}
-                                cardColor="#EC897D"
+                                headerText="Endereços Encontrados"
+                                cardWidth={12}
+                                cardColor="#3ACECF"
                             >
                                 <Grid container>
-                                    <Grid item md style={{width: '100%'}}>
-                                        <RouteDetailsCard data={data.route} frete={frete}/>
+                                    <Grid item md={6} style={{width: '100%', borderRight: '0.2px solid #ddd'}}>
+                                        <AdressDetails data={data.origem} target="Origem"/>
+                                    </Grid>
+                                    <Grid item md={6} style={{width: '100%'}}>
+                                        <AdressDetails data={data.destino} target="Destino"/>
                                     </Grid>
                                 </Grid>
                             </MyCard>
                         </Grid>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Grid container justify="center">
-                            <Grid item xs={6}>
-                                <BigText>Ajustar valor do frete</BigText>
-                                <FreteField 
-                                    id="FRETE"
-                                />
-                                <Grid container justify="center" alignItems="center">
-                                    <Grid item xs={5}>
-                                        <MyButton>
-                                            <Button
-                                                endIcon={<ArrowForwardIosIcon />}
-                                            >
-                                                Calcular
-                                            </Button>
-                                        </MyButton>
+                    <Grid container direction="row" style={{marginTop: '50px'}}>
+                        <Grid item xs={6}>
+                            <Grid container justify="flex-start">
+                                <MyCard
+                                    headerText="Detalhes da rota"
+                                    cardWidth={8}
+                                    cardColor="#EC897D"
+                                >
+                                    <Grid container>
+                                        <Grid item md style={{width: '100%'}}>
+                                            <RouteDetailsCard data={data.route} frete={frete}/>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+                                </MyCard>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Grid container justify="center">
+                            <Grid item xs={6}>
+                                 <BigText>Ajustar valor do frete</BigText>
+                                 <FreteField 
+                                     id="FRETE"
+                                 />
+                             <Grid container justify="center" alignItems="center">
+                                 <Grid item xs={5}>
+                                     <MyButton>
+                                         <Button
+                                             endIcon={<ArrowForwardIosIcon />}
+                                         >
+                                             Calcular
+                                         </Button>
+                                     </MyButton>
+                                 </Grid>
+                             </Grid>
+                         </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-
-        </Grid>
         )}
         </>
     )

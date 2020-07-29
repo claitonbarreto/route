@@ -30,7 +30,7 @@ import Wait from '../Wait'
 const CardContent = styled.div`
     border-radius: 10px;
     width: 100%;
-    box-shadow: 0px 0px 5px #444;
+    box-shadow: 0px 0px 5px #222;
     height: auto;
     margin-top: -35px;
     padding: 25px;

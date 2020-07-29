@@ -15,6 +15,7 @@ const Title = styled.h1`
     color: white;
     font-size: 2em;
     padding: .3em 0;
+    font-family: 'Raleway', sans-serif;
 `;
 
 const Header = ({title, ...props}) => {
