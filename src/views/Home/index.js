@@ -16,6 +16,7 @@ import FreteAction from '../../actions/FreteAction'
 import ThemeAction from '../../actions/ThemeAction'
 import ErrorAction from '../../actions/ErrorAction'
 import Wait from '../../components/Wait'
+import DarkModeInterruptor from '../../components/DarkModeInterruptor'
 
 //STYLED 
 import styled from 'styled-components'
@@ -91,16 +92,18 @@ const Home = (props) => {
     const [busy, setBusy] = useState(false)
     const [redirect, setRedirect] = useState(false)
 
-    useEffect(() => console.log(props), [])
+    useEffect(
+        () => {
+            localStorage.setItem('theme', props.tema)
+        }, [props.tema]
+    )
 
     const toggleTheme = () => {
-        let tema = props.tema
-        console.log(props)
-        if(tema === 'light') {
-            props.dispatch(ThemeAction.setTheme('dark'))
-        } else {
-            props.dispatch(ThemeAction.setTheme('light'))
+        if(props.tema === 'light') {
+            props.dispatch(ThemeAction.setTheme('dark')) 
+            return
         }
+        props.dispatch(ThemeAction.setTheme('light'))
     }
 
     const handleCloseAlert = () => {
@@ -130,7 +133,6 @@ const Home = (props) => {
                     props.dispatch(AlertAction.setShowAlert(true))
                     return
                 }
-                //TODO: ABRIR PAGINA RESULTADO 
                 props.dispatch(ErrorAction.clearError())
                 props.dispatch(RouteActions.setRoute(res.data))
                 props.dispatch(FreteAction.setFrete(props.frete))
@@ -149,11 +151,10 @@ const Home = (props) => {
             errors={props.errors}
             handleClose={handleCloseAlert}
         />
-        <ThemeButtonStyle>
-            <Button onClick={toggleTheme}>
-                Mudar Tema
-            </Button>
-        </ThemeButtonStyle>
+        <DarkModeInterruptor 
+            theme={props.tema}
+            toggleTheme={toggleTheme}
+        />
         <Grid
             container
             spacing={0} 
