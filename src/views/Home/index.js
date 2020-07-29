@@ -16,6 +16,7 @@ import FreteAction from '../../actions/FreteAction'
 import ThemeAction from '../../actions/ThemeAction'
 import ErrorAction from '../../actions/ErrorAction'
 import Wait from '../../components/Wait'
+import DarkModeInterruptor from '../../components/DarkModeInterruptor'
 
 //STYLED 
 import styled from 'styled-components'
@@ -55,16 +56,16 @@ const MyTextInput = styled.div`
     }
     
     & .Mui-focused {
-        color: #00696A
+        color: ${({theme}) => theme.selectedInputColor}
     }
     & .Mui-focused * {
-        color: #00696A
+        color: ${({theme}) => theme.selectedInputColor}
     }
     & label.Mui-focused {
-        color: #00696A;
+        color: ${({theme}) => theme.selectedInputColor}
     }
     & .MuiInput-underline:after {
-        border-bottom-color: #00696A
+        border-bottom-color: ${({theme}) => theme.selectedInputColor}
     }
 `;
 
@@ -78,7 +79,7 @@ const CardForm = styled.div`
 
 const MyButton = styled.div`
     margin-top: 60px;
-    background-color: #ED6A5A;
+    background-color: ${({theme}) => theme.buttonColor};
     border-radius: 10px;
     & * {color: white;}
 `;
@@ -90,18 +91,6 @@ const Home = (props) => {
 
     const [busy, setBusy] = useState(false)
     const [redirect, setRedirect] = useState(false)
-
-    useEffect(() => console.log(props), [])
-
-    const toggleTheme = () => {
-        let tema = props.tema
-        console.log(props)
-        if(tema === 'light') {
-            props.dispatch(ThemeAction.setTheme('dark'))
-        } else {
-            props.dispatch(ThemeAction.setTheme('light'))
-        }
-    }
 
     const handleCloseAlert = () => {
         props.dispatch(AlertAction.setShowAlert(false))
@@ -130,7 +119,6 @@ const Home = (props) => {
                     props.dispatch(AlertAction.setShowAlert(true))
                     return
                 }
-                //TODO: ABRIR PAGINA RESULTADO 
                 props.dispatch(ErrorAction.clearError())
                 props.dispatch(RouteActions.setRoute(res.data))
                 props.dispatch(FreteAction.setFrete(props.frete))
@@ -149,11 +137,6 @@ const Home = (props) => {
             errors={props.errors}
             handleClose={handleCloseAlert}
         />
-        <ThemeButtonStyle>
-            <Button onClick={toggleTheme}>
-                Mudar Tema
-            </Button>
-        </ThemeButtonStyle>
         <Grid
             container
             spacing={0} 
@@ -162,7 +145,15 @@ const Home = (props) => {
             justify="center"
             alignItems="center"
         >   
-            <MyCard shadow cardColor="#05A8AA" headerText="Calcule sua rota" redirect={redirect} suggest>
+            <MyCard 
+                shadow
+                suggest  
+                cardColor="#05A8AA" 
+                headerText="Calcule sua rota" 
+                redirect={redirect} 
+                themeColor={props.tema}
+                cardWidth={7}
+            >
             <CardForm>
                 <MyTextInput>
                     <CepField 

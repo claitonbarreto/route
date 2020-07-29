@@ -49,46 +49,48 @@ const RouteDetails = ({data, frete}) => {
                         >
                             <Grid container>
                                 <Grid item md={6} style={{width: '100%', borderRight: '1px solid #ddd'}}>
-                                    <AdressDetails data={data.origem}/>
+                                    <AdressDetails data={data.origem} target="Origem"/>
                                 </Grid>
                                 <Grid item md={6} style={{width: '100%'}}>
-                                    <AdressDetails data={data.destino}/>
+                                    <AdressDetails data={data.destino} target="Destino"/>
                                 </Grid>
                             </Grid>
                         </MyCard>
                     </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                    <Grid container justify="flex-end">
-                        <MyCard
-                            headerText="Detalhes da rota"
-                            cardWidth={6}
-                            cardColor="#EC897D"
-                        >
-                            <Grid container>
-                                <Grid item md style={{width: '100%'}}>
-                                    <RouteDetailsCard data={data.route} frete={frete}/>
+                <Grid container justify="center">
+                    <Grid item xs={4}>
+                        <Grid container justify="center">
+                            <MyCard
+                                headerText="Detalhes da rota"
+                                cardWidth={8}
+                                cardColor="#EC897D"
+                            >
+                                <Grid container>
+                                    <Grid item md style={{width: '100%'}}>
+                                        <RouteDetailsCard data={data.route} frete={frete}/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </MyCard>
+                            </MyCard>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid item xs={6}>
-                    <Grid container justify="flex-start">
-                        <Grid item xs={4}>
-                            <BigText>Recalcular Frete</BigText>
-                            <FreteField 
-                                id="FRETE"
-                            />
-                            <Grid container justify="center" alignItems="center">
-                                <Grid item xs={5}>
-                                    <MyButton>
-                                        <Button
-                                            endIcon={<ArrowForwardIosIcon />}
-                                        >
-                                            Calcular
-                                        </Button>
-                                    </MyButton>
+                    <Grid item xs={4}>
+                        <Grid container justify="center">
+                            <Grid item xs={6}>
+                                <BigText>Ajustar valor do frete</BigText>
+                                <FreteField 
+                                    id="FRETE"
+                                />
+                                <Grid container justify="center" alignItems="center">
+                                    <Grid item xs={5}>
+                                        <MyButton>
+                                            <Button
+                                                endIcon={<ArrowForwardIosIcon />}
+                                            >
+                                                Calcular
+                                            </Button>
+                                        </MyButton>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -116,11 +118,11 @@ const BigText = styled(TextLabel)`
     font-size: 2em;
 `
 
-const AdressDetails = ({data}) => {
+const AdressDetails = ({data, target}) => {
     return (
         <>
             <MyFlexGrid direction="row">
-                <TextDestak color="#ED6A5A">Origem</TextDestak>
+                <TextDestak color="#ED6A5A">{target}</TextDestak>
                 <TextLabel>{data.dataCep.cep}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">

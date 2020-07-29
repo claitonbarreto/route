@@ -1,5 +1,5 @@
 const initialState = {
-    theme: 'light'
+    theme: localStorage.getItem('theme') || 'light'
 }
 
 export default (state = initialState, action) => {
