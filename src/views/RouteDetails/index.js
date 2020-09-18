@@ -16,8 +16,6 @@ import FreteField from '../../components/FreteField'
 //stores
 import store from '../../store/index'
 
-
-
 const MyGrid = styled.div`
     display: flex;
     justify-content: center;
@@ -31,21 +29,39 @@ const MyButton = styled.div`
     & * {color: white;}
 `;
 
+const BottomGridContainer = styled(Grid)`
+    @media (max-width: 960px) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+`
+
+const Container = styled(Grid)`
+    @media (max-width: 960px) {
+        margin-top: 1.5rem;
+    }
+`
+
 const RouteDetails = ({data, frete}) => {
+
+    
 
     return (
         <>
         {data.length === 0 ? (
             <Redirect to="/" />
-        ) : (
-            <Grid container justify="center" alignItems="center" style={{minHeight: '100vh'}}>
-                <Grid item xs={7} direction="column">
-                    <Grid item xs={12}>
+        ) : 
+        (
+            <Container container justify="center" alignItems="center" style={{minHeight: '100vh'}}>
+                <Grid item xs={12} sm={10} md={10} lg={8} xl={8}  direction="column">
+                    <Grid item xs={12} >
                         <Grid container justify="center">
                             <MyCard
                                 headerText="Endereços Encontrados"
                                 cardWidth={12}
                                 cardColor="#3ACECF"
+                                xs={12} sm={12} md={12} lg={12} xl={12}
                             >
                                 <Grid container>
                                     <Grid item md={6} style={{width: '100%', borderRight: '0.2px solid #ddd'}}>
@@ -58,13 +74,24 @@ const RouteDetails = ({data, frete}) => {
                             </MyCard>
                         </Grid>
                     </Grid>
-                    <Grid container direction="row" style={{marginTop: '50px'}}>
-                        <Grid item xs={6}>
+                    <BottomGridContainer container direction="row" style={{marginTop: '50px'}}>
+                        <Grid 
+                            item 
+                            sm={12} 
+                            md={6} 
+                            lg={6} 
+                            xl={6}
+                        >
                             <Grid container justify="flex-start">
                                 <MyCard
                                     headerText="Detalhes da rota"
                                     cardWidth={8}
                                     cardColor="#EC897D"
+                                    xs={12} 
+                                    sm={12} 
+                                    md={10} 
+                                    lg={10} 
+                                    xl={9} 
                                 >
                                     <Grid container>
                                         <Grid item md style={{width: '100%'}}>
@@ -76,7 +103,7 @@ const RouteDetails = ({data, frete}) => {
                         </Grid>
                         <Grid item xs={6}>
                             <Grid container justify="center">
-                            <Grid item xs={6}>
+                            <Grid item xs={12} sm={10} md={10} lg={8} xl={6}>
                                  <BigText>Ajustar valor do frete</BigText>
                                  <FreteField 
                                      id="FRETE"
@@ -95,9 +122,9 @@ const RouteDetails = ({data, frete}) => {
                          </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
+                    </BottomGridContainer>
                 </Grid>
-            </Grid>
+            </Container>
         )}
         </>
     )
@@ -115,6 +142,11 @@ const TextLabel = styled.label`
 `
 const BigText = styled(TextLabel)`
     font-size: 2em;
+
+    @media (max-width: 1440px) {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
 `
 
 const AdressDetails = ({data, target}) => {

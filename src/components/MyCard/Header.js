@@ -9,6 +9,10 @@ const HeaderContent = styled.div`
     width: 90%;
     text-align: center;
     z-index: 2;
+
+    @media (max-width: 768px) {
+        width: 84%;
+    }
 `;
 
 const Title = styled.h1`
@@ -16,6 +20,10 @@ const Title = styled.h1`
     font-size: 2em;
     padding: .3em 0;
     font-family: 'Raleway', sans-serif;
+
+    @media (max-width: 1440px) {
+        font-size: 1.5rem;
+    }
 `;
 
 const Header = ({title, ...props}) => {

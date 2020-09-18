@@ -11,9 +11,9 @@ export default {
         destino: {
             dataCep: {
                 cep: '25265080',
-                logradouro: 'Rua Capanema',
+                logradouro: 'Rua Nossa Senhora da Guia',
                 bairro: 'Parada Morabi',
-                localidade: 'Duque de Caxias'
+                localidade: 'São Francisco dos Prazeres'
             }
         },
         route: {

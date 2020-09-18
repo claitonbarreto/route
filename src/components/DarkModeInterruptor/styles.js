@@ -14,7 +14,8 @@ export const InterruptorDiv = styled.div`
   flex-direction: row;
   align-items: center;
   background-color: ${({theme}) => theme === 'light' ? '#555' : '#ddd'};
-  box-shadow: 1px 0px 3px black; 
+  box-shadow: 1px 0px 3px black;
+  z-index: 300; 
 `
 
 export const InterruptorButton = styled.div`

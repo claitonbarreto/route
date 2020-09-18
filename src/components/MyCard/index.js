@@ -35,6 +35,12 @@ const CardContent = styled.div`
     margin-top: -35px;
     padding: 25px;
     background-color: ${({theme}) => theme.cardBackground};
+
+    @media (max-width: 768px) {
+        margin-left: .8rem;
+        margin-right: .8rem;
+    }
+
 `;
 
 const Text = styled.p`
@@ -60,10 +66,17 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
             {props.redirect && (
                 <Redirect to="/route-details" />
             )}
-            <Grid container xs={cardWidth} direction="row" justify="center" alignItems="center">
-                
-               
-
+            <Grid 
+                container 
+                xs={props.xs} 
+                sm={props.sm} 
+                md={props.md} 
+                lg={props.lg} 
+                xl={props.xl}  
+                direction="row" 
+                justify="center" 
+                alignItems="center"
+            >
                 <Header title={headerText} color={props.cardColor} themeColor={props.themeColor}/>
                 
                 <CardContent cardColor={props.cardColor} shadow={shadow}>

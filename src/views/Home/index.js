@@ -29,6 +29,10 @@ const HomeGrid = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 768px) {
+        padding-top: 2rem;
+    }
 `;
 
 const MyTextInput = styled.div`
@@ -140,7 +144,11 @@ const Home = (props) => {
         <Grid
             container
             spacing={0} 
-            md={5} xs={12} 
+            xs={12} 
+            sm={8} 
+            md={8} 
+            lg={8} 
+            xl={5}
             direction="row" 
             justify="center"
             alignItems="center"
@@ -153,6 +161,11 @@ const Home = (props) => {
                 redirect={redirect} 
                 themeColor={props.tema}
                 cardWidth={7}
+                xs={12}
+                sm={12}
+                md={12}
+                lg={8}
+                xl={6}
             >
             <CardForm>
                 <MyTextInput>
