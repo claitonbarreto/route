@@ -7,7 +7,6 @@ import {
     Route
 } from 'react-router-dom'
 import Home from '../Home'
-import Users from '../Users'
 import RouteDetails from '../RouteDetails'
 import ThemeAction from '../../actions/ThemeAction'
 import { ThemeProvider } from 'styled-components'
@@ -43,9 +42,6 @@ const Root = (props) => {
                 <Switch>
                     <Route exact path="/">
                         <Home />
-                    </Route>
-                    <Route path="/users">
-                        <Users />
                     </Route>
                     <Route path="/route-details">
                         <RouteDetails />
