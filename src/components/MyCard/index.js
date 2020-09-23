@@ -1,31 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 //MATERIAL-UI
-import { TextField, Button, InputAdornment, Grid } from '@material-ui/core'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import MailIcon from '@material-ui/icons/Mail';
+import { Grid } from '@material-ui/core'
 
 //styled
 import styled from 'styled-components'
 
-//STORE
-import store from '../../store/index'
-import routeStore from '../../@api/store/routeStore'
-
 //actions
-import RouteActions from '../../actions/RouteActions'
 import ErrorAction from '../../actions/ErrorAction'
 import AlertAction from '../../actions/AlertAction'
 
 //My components
 import Header from './Header'
-import CepField from '../CepField'
-import FreteField from '../FreteField'
-import validations from './validations'
-import MyAlert from '../../components/MyAlert'
-import Wait from '../Wait'
 
 const CardContent = styled.div`
     border-radius: 10px;
@@ -41,14 +29,6 @@ const CardContent = styled.div`
         margin-right: .8rem;
     }
 
-`;
-
-const Text = styled.p`
-    text-align: center;
-    font-size: 12pt;
-    color: ${props => props.color ? props.color : ({theme}) => theme.inputLabel};
-    margin-bottom: 5px;
-    font-weight: 500;
 `;
 
 
