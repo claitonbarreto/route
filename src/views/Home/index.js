@@ -100,6 +100,7 @@ const Home = (props) => {
     const handleCloseAlert = () => {
         props.dispatch(AlertAction.setShowAlert(false))
         props.dispatch(ErrorAction.clearError('dados'))
+        props.dispatch(ErrorAction.clearError('API'))
     }
 
     const handleSend = (e) => {
@@ -119,6 +120,12 @@ const Home = (props) => {
             setBusy(true)
             var promise = routeStore.getRoute(cep_origem, cep_destino)
             promise.then(res => {
+                if(!res.data) {
+                    props.dispatch(ErrorAction.setError(["Não foi possível estabelecer conexão com a API"]))
+                    props.dispatch(AlertAction.setShowAlert(true))
+                    return
+                }
+
                 if(res.data.error) {
                     props.dispatch(ErrorAction.setError([res.data.message]))
                     props.dispatch(AlertAction.setShowAlert(true))
