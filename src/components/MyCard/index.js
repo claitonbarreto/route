@@ -83,7 +83,7 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
                     {children}           
                 </CardContent>
             </Grid>
-            {props.suggest && <Grid xs={12} style={{marginTop: '20px'}}>
+            {/* {props.suggest && <Grid xs={12} style={{marginTop: '20px'}}>
                 <Text>Alguma sugestão ou reclamação? Não de acanhe, me envie um e-mail:</Text>
                 <a href="#">
                     <Text color="#ED6A5A">
@@ -91,7 +91,7 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
                         claitonbarreto@gmail.com
                     </Text>
                 </a>
-            </Grid>}
+            </Grid>} */}
         </>
     )
 }

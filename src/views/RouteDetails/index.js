@@ -15,6 +15,7 @@ import FreteField from '../../components/FreteField'
 
 //stores
 import store from '../../store/index'
+import FooterText from '../../components/FooterText'
 
 const MyGrid = styled.div`
     display: flex;
@@ -124,6 +125,7 @@ const RouteDetails = ({data, frete}) => {
                         </Grid>
                     </BottomGridContainer>
                 </Grid>
+                <FooterText />
             </Container>
         )}
         </>

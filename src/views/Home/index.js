@@ -21,6 +21,7 @@ import Logo from '../../components/Logo'
 
 //STYLED 
 import styled from 'styled-components'
+import FooterText from '../../components/FooterText'
 
 const HomeGrid = styled.div`
     background-image: url(${props => props.imageUrl});
@@ -212,6 +213,7 @@ const Home = (props) => {
             </CardForm>
             </MyCard>
         </Grid>
+        <FooterText />
     </HomeGrid>
    )
 }

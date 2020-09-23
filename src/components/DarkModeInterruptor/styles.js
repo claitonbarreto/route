@@ -4,9 +4,9 @@ import {IoIosMoon, IoMdSunny} from 'react-icons/io'
 
 export const InterruptorDiv = styled.div`
   position: absolute;
-  left: 10px;
+  right: 10px;
   top: 10px;
-  width: 70px;
+  width: 60px;
   height: 30px;
   padding: 2px;
   border-radius: 30px;
