@@ -17,6 +17,8 @@ import ThemeAction from '../../actions/ThemeAction'
 import ErrorAction from '../../actions/ErrorAction'
 import Wait from '../../components/Wait'
 import DarkModeInterruptor from '../../components/DarkModeInterruptor'
+import logo_orange from '../../assets/logo/routelogo_orange.png'
+import logo_white from '../../assets/logo/routelogo_white.png'
 
 //STYLED 
 import styled from 'styled-components'
@@ -149,10 +151,12 @@ const Home = (props) => {
             md={8} 
             lg={8} 
             xl={5}
-            direction="row" 
+            direction="column" 
             justify="center"
             alignItems="center"
-        >   
+        > 
+            <img src={logo_orange} alt="Logo"/>
+
             <MyCard 
                 shadow
                 suggest  
