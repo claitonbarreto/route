@@ -2,17 +2,18 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     position: absolute;
-    bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    bottom: 0;
+    padding: 0;
+
+    @media (max-width: 768px) {
+        padding: 0;
+    }
 `
 
 export const Text = styled.p`
     text-align: center;
     font-size: 12pt;
     color: ${props => props.color ? props.color : ({theme}) => theme.inputLabel};
-    margin-bottom: 5px;
     font-weight: 500;
 `
 

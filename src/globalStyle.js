@@ -10,5 +10,9 @@ export default createGlobalStyle`
         max-width: 100vw;
     }
 
+    #root {
+        position: relative;
+    }
+
     h1,h2,h3,p,label,span, * {font-weight: 100}
 `

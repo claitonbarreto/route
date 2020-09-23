@@ -150,6 +150,7 @@ const Home = (props) => {
     }
 
    return (
+    <>
     <HomeGrid imageUrl={process.env.PUBLIC_URL+'back.png'}>
         {busy && <Wait />}
         <MyAlert 
@@ -215,6 +216,7 @@ const Home = (props) => {
         </Grid>
         <FooterText />
     </HomeGrid>
+    </>
    )
 }
 
