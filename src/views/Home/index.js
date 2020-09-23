@@ -100,7 +100,7 @@ const Home = (props) => {
     const handleCloseAlert = () => {
         props.dispatch(AlertAction.setShowAlert(false))
         props.dispatch(ErrorAction.clearError('dados'))
-        props.dispatch(ErrorAction.clearError('API'))
+        props.dispatch(ErrorAction.clearError('Mensagem'))
     }
 
     const handleSend = (e) => {
@@ -109,36 +109,42 @@ const Home = (props) => {
         let cep_origem = state.CepReducer.cepOrigem
         let cep_destino = state.CepReducer.cepDestino
         
-         if(state.ErrorReducer.error.length > 0) {
+        if(cep_origem == '' || cep_destino == '') {
+            props.dispatch(ErrorAction.setError(["Mensagem: Um ou mais CEPs estão vazios!"]))
+            props.dispatch(AlertAction.setShowAlert(true))
+            return
+        }
 
-             props.dispatch(AlertAction.setShowAlert(true))
-        
-         } else {
-    
-            props.dispatch(AlertAction.setShowAlert(false))
-    
-            setBusy(true)
-            var promise = routeStore.getRoute(cep_origem, cep_destino)
-            promise.then(res => {
-                if(!res.data) {
-                    props.dispatch(ErrorAction.setError(["Não foi possível estabelecer conexão com a API"]))
-                    props.dispatch(AlertAction.setShowAlert(true))
-                    return
-                }
+        if(state.ErrorReducer.error.length > 0) {
 
-                if(res.data.error) {
-                    props.dispatch(ErrorAction.setError([res.data.message]))
-                    props.dispatch(AlertAction.setShowAlert(true))
-                    return
-                }
-                props.dispatch(ErrorAction.clearError())
-                props.dispatch(RouteActions.setRoute(res.data))
-                props.dispatch(FreteAction.setFrete(props.frete))
-                setRedirect(true)
-            })
+            props.dispatch(AlertAction.setShowAlert(true))
     
-            promise.finally(() => {setBusy(false)})
-         }    
+        } else {
+
+        props.dispatch(AlertAction.setShowAlert(false))
+
+        setBusy(true)
+        var promise = routeStore.getRoute(cep_origem, cep_destino)
+        promise.then(res => {
+            if(!res.data) {
+                props.dispatch(ErrorAction.setError(["Mensagem: Não foi possível estabelecer conexão com a API"]))
+                props.dispatch(AlertAction.setShowAlert(true))
+                return
+            }
+
+            if(res.data.error) {
+                props.dispatch(ErrorAction.setError([res.data.message]))
+                props.dispatch(AlertAction.setShowAlert(true))
+                return
+            }
+            props.dispatch(ErrorAction.clearError())
+            props.dispatch(RouteActions.setRoute(res.data))
+            props.dispatch(FreteAction.setFrete(props.frete))
+            setRedirect(true)
+        })
+
+        promise.finally(() => {setBusy(false)})
+        }    
         
     }
 
