@@ -3,16 +3,20 @@ import { connect } from 'react-redux'
 import {
     BrowserRouter as Router,
     Switch,
-    Link,
     Route
 } from 'react-router-dom'
-import Home from '../Home'
-import RouteDetails from '../RouteDetails'
+
+//My imports
 import ThemeAction from '../../actions/ThemeAction'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '../../theme'
 import DarkModeInterruptor from '../../components/DarkModeInterruptor'
 import GlobalTheme from '../../globalStyle'
+
+//Pages
+import Home from '../Home'
+import RouteDetails from '../RouteDetails'
+import _404 from '../_404'
 
 const Root = (props) => {
 
@@ -45,6 +49,9 @@ const Root = (props) => {
                     </Route>
                     <Route path="/route-details">
                         <RouteDetails />
+                    </Route>
+                    <Route>
+                        <_404 />
                     </Route>
                 </Switch>
             </Router>
