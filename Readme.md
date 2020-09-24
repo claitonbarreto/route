@@ -15,7 +15,7 @@
 
 <br>
 
-### ☑ Features {#features}
+<h3 id="features"> ☑ Features </h3>
 
 
 - [x] Search and show Brazilian Postal Codes 
@@ -31,7 +31,7 @@
 
 <br>
 
-### 🔨 Used Techs {#techs}
+<h3 id="techs"> 🔨 Used Techs </h3>
 
 <div>
 <a href="https://reactjs.com"><img src="./src/assets/.github/techs_logos/react.png" width="80" style="margin-right: 20px"></a>
@@ -43,7 +43,7 @@
 
 <br>
 
-### ✍🏾 Author {#author}
+<h3 id="author"> ✍🏾 Author </h3>
 
 <img style="border-radius: 50%" width="110px" src="https://avatars0.githubusercontent.com/u/34696974?s=460&u=5c8f1eb1dd1d1620bf1d68c804e89a11d7c97c7d&v=4">
 
