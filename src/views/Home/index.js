@@ -180,8 +180,8 @@ const Home = (props) => {
                 cardWidth={7}
                 xs={12}
                 sm={12}
-                md={12}
-                lg={8}
+                md={10}
+                lg={6}
                 xl={6}
             >
             <CardForm>
