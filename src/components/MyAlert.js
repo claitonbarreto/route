@@ -40,8 +40,6 @@ const MyAlert = ({errors, ...props}) => {
         props.handleClose()
     }
 
-    useEffect(() => console.log(errors))
-
     {if(props.showAlert === true) {
         return (
             <CardAlert>
@@ -51,8 +49,8 @@ const MyAlert = ({errors, ...props}) => {
                         onClose={handleClose}
                     >
                         <AlertTitle>Erro!</AlertTitle>
-                        {props.error.map((err, key) => {
-                            return <p key={key}> {err.error}, <strong>code: {err.code}</strong> </p>
+                        {errors.map((err, key) => {
+                            return <p key={key}> {err} </p>
                         })}
                     </Alert>
                 </Animated>

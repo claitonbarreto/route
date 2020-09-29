@@ -1,8 +1,8 @@
 export default {
     setError(error) {
-        return {type: 'SET_ERROR', payload: {error}}
+        return {type: 'SET_ERROR', payload: error}
     },
-    clearError(id) {
+    clearErrors(id) {
         return {type: 'CLEAR_ERROR', payload: id}
     }
 }

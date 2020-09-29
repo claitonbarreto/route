@@ -1,17 +1,29 @@
 const initialState = {
-    error: [],
-    apiError: []
+    errors: []
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case 'SET_ERROR':
-            return {...state, error: [...state.error, action.payload]}
+            
+            var localState = state.errors
+
+            if(localState.indexOf(action.payload) == -1) {
+                localState = [...localState, action.payload]
+            }
+            
+            return {...state, errors: localState}
         case 'CLEAR_ERROR':
-            return {...state, error: state.error.filter(value => {
-                console.log(value)
-                return !value.error[0].includes(action.payload)
-            })}
+
+            const id = action.payload
+
+            var localState = state.errors
+
+            localState = localState.filter(error => {
+                return error.indexOf(id) == -1
+            })
+            
+            return {...state, errors: localState}
         default:
             return state
     }

@@ -12,41 +12,17 @@ import styled from 'styled-components'
 //My Components
 import MyCard from '../../components/MyCard/index'
 import FreteField from '../../components/FreteField'
-
-//stores
-import store from '../../store/index'
 import FooterText from '../../components/FooterText'
 
-const MyGrid = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
 
-const MyButton = styled.div`
-    margin-top: 60px;
-    background-color: #ED6A5A;
-    border-radius: 10px;
-    & * {color: white;}
-`;
-
-const BottomGridContainer = styled(Grid)`
-    @media (max-width: 960px) {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-`
-
-const Container = styled(Grid)`
-    @media (max-width: 960px) {
-        margin-top: 1.5rem;
-    }
-`
+import {
+    BottomGridContainer,
+    Container,
+    MyButton,
+    MyGrids
+} from './styles'
 
 const RouteDetails = ({data, frete}) => {
-
-    
 
     return (
         <>

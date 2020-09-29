@@ -1,11 +1,14 @@
+//VENDORS
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import { Grid, Paper, Button } from '@material-ui/core'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
+//STORE
 import store from '../../store/index'
 import routeStore from '../../@api/store/routeStore'
 
+//MY COMPONENTS
 import MyCard from '../../components/MyCard/index'
 import MyAlert from '../../components/MyAlert'
 import CepField from '../../components/CepField'
@@ -18,80 +21,15 @@ import ErrorAction from '../../actions/ErrorAction'
 import Wait from '../../components/Wait'
 import DarkModeInterruptor from '../../components/DarkModeInterruptor'
 import Logo from '../../components/Logo'
-
-//STYLED 
-import styled from 'styled-components'
 import FooterText from '../../components/FooterText'
 
-const HomeGrid = styled.div`
-    background-image: url(${props => props.imageUrl});
-    background-size: cover;
-    background-position: auto;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @media (max-width: 768px) {
-        padding-top: 2rem;
-    }
-`;
-
-const MyTextInput = styled.div`
-    margin: 5px 0px 20px 0px;
-    width: 100%;
-
-    & .MuiInput-underline:before {
-        border-bottom: ${({theme}) => `1px solid ${theme.inputUnderlineColor}`}
-    }
-
-    & .MuiFormLabel-root {
-        color: ${({theme}) => theme.inputLabel};
-    }
-
-    & .MuiFormHelperText-root {
-        color: ${({theme}) => theme.inputLabel}
-    }
-
-    & .MuiTypography-colorTextSecondary {
-        color: ${({theme}) => theme.inputLabel}
-    }
-
-    & .MuiInputBase-input {
-        color: ${({theme}) => theme.inputLabel}
-    }
-    
-    & .Mui-focused {
-        color: ${({theme}) => theme.selectedInputColor}
-    }
-    & .Mui-focused * {
-        color: ${({theme}) => theme.selectedInputColor}
-    }
-    & label.Mui-focused {
-        color: ${({theme}) => theme.selectedInputColor}
-    }
-    & .MuiInput-underline:after {
-        border-bottom-color: ${({theme}) => theme.selectedInputColor}
-    }
-`;
-
-const CardForm = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 15%;
-    margin-top: 80px;
-`;
-
-const MyButton = styled.div`
-    margin-top: 60px;
-    background-color: ${({theme}) => theme.buttonColor};
-    border-radius: 10px;
-    & * {color: white;}
-`;
-
-
-
+//STYLED 
+import {
+    CardForm,
+    HomeGrid,
+    MyButton,
+    MyTextInput
+} from './styles'
 
 const Home = (props) => {
 
@@ -100,45 +38,49 @@ const Home = (props) => {
 
     const handleCloseAlert = () => {
         props.dispatch(AlertAction.setShowAlert(false))
-        props.dispatch(ErrorAction.clearError('dados'))
-        props.dispatch(ErrorAction.clearError('Mensagem'))
     }
 
     const handleSend = (e) => {
         var state = store.getState();
-    
+
         let cep_origem = state.CepReducer.cepOrigem
         let cep_destino = state.CepReducer.cepDestino
         
-        if(cep_origem == '' || cep_destino == '') {
-            props.dispatch(ErrorAction.setError(["Mensagem: Um ou mais CEPs estão vazios!"]))
+        if(cep_origem == '') {
+            props.dispatch(ErrorAction.setError('ORIGEM: O campo não pode ser vazio'))
             props.dispatch(AlertAction.setShowAlert(true))
             return
         }
 
-        if(state.ErrorReducer.error.length > 0) {
+        if(cep_destino == '') {
+            props.dispatch(ErrorAction.setError('DESTINO: O campo não pode ser vazio'))
+            props.dispatch(AlertAction.setShowAlert(true))
+            return
+        }
+
+        if(props.errors.length > 0) {
 
             props.dispatch(AlertAction.setShowAlert(true))
-    
+
         } else {
 
         props.dispatch(AlertAction.setShowAlert(false))
 
         setBusy(true)
+        
         var promise = routeStore.getRoute(cep_origem, cep_destino)
         promise.then(res => {
             if(!res.data) {
-                props.dispatch(ErrorAction.setError(["Mensagem: Não foi possível estabelecer conexão com a API"]))
+                props.dispatch(ErrorAction.setError("Mensagem: Não foi possível estabelecer conexão com a API"))
                 props.dispatch(AlertAction.setShowAlert(true))
                 return
             }
 
             if(res.data.error) {
-                props.dispatch(ErrorAction.setError([res.data.message]))
+                props.dispatch(ErrorAction.setError(res.data.message))
                 props.dispatch(AlertAction.setShowAlert(true))
                 return
             }
-            props.dispatch(ErrorAction.clearError())
             props.dispatch(RouteActions.setRoute(res.data))
             props.dispatch(FreteAction.setFrete(props.frete))
             setRedirect(true)
@@ -220,14 +162,7 @@ const Home = (props) => {
    )
 }
 
-const ThemeButtonStyle = styled.div`
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: auto;
-    height: auto;
-    border: 1px solid red;
-`
+
 
 export default connect(store => ({
     cepOrigem: store.CepReducer.cepOrigem,

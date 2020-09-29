@@ -6,7 +6,6 @@ import { TextField } from '@material-ui/core'
 
 //My imports
 import validations from './MyCard/validations'
-import store from '../store/index'
 
 
 const CepField = ({id, label, value, ...props}) => {
@@ -19,12 +18,17 @@ const CepField = ({id, label, value, ...props}) => {
         const validate = validations({cep, id}, 'cep')
         
         if(validate.length === 0) {
-            props.dispatch(ErrorAction.clearError(id))
             setError(false)
         } else { 
-            props.dispatch(ErrorAction.setError(validate))
+            validate.map(error => {
+                props.dispatch(ErrorAction.setError(error))
+            })
             setError(true)
         }
+    }
+
+    const clearError = () => {
+        props.dispatch(ErrorAction.clearErrors(id))
     }
 
     const handleTextChange = (e) => {
@@ -43,6 +47,7 @@ const CepField = ({id, label, value, ...props}) => {
                 value={value}
                 helperText={"Somente números"}
                 onBlur={cepValidate}
+                onFocus={clearError}
                 fullWidth
             />
            

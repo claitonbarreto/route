@@ -14,8 +14,9 @@ const cepValidate = ({cep,id}) => {
 
     let errors = []
     
-    if(cep.length !== 8) errors.push(`O CAMPO CEP ${id} PRECISA TER 8 CARACTERES`)
-    if(cep === "00000000") errors.push(`O CAMPO CEP ${id} ESTÁ INVÁLIDO`)
+    if(cep.length !== 8) errors.push(`${id}: O campo precisa ter 8 caracteres`)
+    if(/\D/.test(cep)) errors.push(`${id}: O campo precisa conter apenas números`)
+    if(cep === "00000000") errors.push(`${id}: O campo está inválido`)
 
     if(errors === []) return true
 
@@ -26,7 +27,7 @@ const freteValidate = ({frete, id}) => {
 
     let errors = []
 
-    if(frete.indexOf('.') !== -1) errors.push(`O CAMPO ${id} NÃO PODE CONTER PONTO (.)`)
+    if(frete.indexOf('.') !== -1) errors.push(`${id}: O campo não pode conter ponto (.)`)
 
     if(errors === []) return true
 

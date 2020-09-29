@@ -19,7 +19,7 @@ const FreteField = ({id, ...props}) => {
         let frete = e.target.value
         const validate = validations({frete, id}, 'frete')
         if(validate.length === 0) {
-            props.dispatch(ErrorAction.clearError(id))
+            props.dispatch(ErrorAction.clearErrors(id))
             setError(false)
         } else {
             props.dispatch(ErrorAction.setError(validate))
@@ -43,6 +43,7 @@ const FreteField = ({id, ...props}) => {
                 helperText={helperErrorText !== '' ? helperErrorText : 'use "," como separador'}
                 onChange={handleFreteChange}
                 onBlur={validateFrete}
+                onFocus={() => props.dispatch(ErrorAction.clearErrors(id))}
                 InputProps={{
                     startAdornment: <InputAdornment position="start">R$</InputAdornment>
                 }}
