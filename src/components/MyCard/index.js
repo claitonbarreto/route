@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Animated } from 'react-animated-css'
 
 //MATERIAL-UI
 import { Grid } from '@material-ui/core'
@@ -13,7 +14,7 @@ import AlertAction from '../../actions/AlertAction'
 import Header from './Header'
 
 
-import { CardContent } from './styles'
+import { Container, CardContent } from './styles'
 
 const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
     
@@ -28,6 +29,7 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
             {props.redirect && (
                 <Redirect to="/route-details" />
             )}
+            
             <Grid 
                 container 
                 xs={props.xs} 
@@ -39,11 +41,17 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
                 justify="center" 
                 alignItems="center"
             >
-                <Header title={headerText} color={props.cardColor} themeColor={props.themeColor}/>
-                
-                <CardContent cardColor={props.cardColor} shadow={shadow}>
-                    {children}           
-                </CardContent>
+                <Container
+                    animationIn={props.animationIn}
+                    animationInDelay={props.animationInDelay}
+                    animationInDuration={props.animationDuration}
+                >
+                    <Header title={headerText} color={props.cardColor} themeColor={props.themeColor}/>
+                    
+                    <CardContent cardColor={props.cardColor} shadow={shadow}>
+                        {children}           
+                    </CardContent>
+                </Container>
             </Grid>
         </>
     )

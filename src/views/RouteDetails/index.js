@@ -38,6 +38,7 @@ const RouteDetails = ({data, frete}) => {
                                 headerText="Endereços Encontrados"
                                 cardWidth={12}
                                 cardColor="#3ACECF"
+                                animationIn="fadeInLeft"
                                 xs={12} sm={12} md={12} lg={12} xl={12}
                             >
                                 <Grid container>
@@ -64,6 +65,8 @@ const RouteDetails = ({data, frete}) => {
                                     headerText="Detalhes da rota"
                                     cardWidth={8}
                                     cardColor="#EC897D"
+                                    animationIn="fadeInUp"
+                                    animationInDelay={200}
                                     xs={12} 
                                     sm={12} 
                                     md={10} 

@@ -125,6 +125,7 @@ const Home = (props) => {
                 md={10}
                 lg={6}
                 xl={6}
+                animationDuration={50}
             >
             <CardForm>
                 <MyTextInput>
