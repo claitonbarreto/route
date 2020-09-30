@@ -56,7 +56,8 @@ const RouteDetails = ({data, frete}) => {
                     </Grid>
                     <BottomGridContainer container direction="row" style={{marginTop: '50px'}}>
                         <Grid 
-                            item 
+                            item
+                            xs={12} 
                             sm={12} 
                             md={6} 
                             lg={6} 
@@ -65,7 +66,6 @@ const RouteDetails = ({data, frete}) => {
                             <Grid container justify="flex-start">
                                 <MyCard
                                     headerText="Detalhes da rota"
-                                    cardWidth={8}
                                     cardColor="#EC897D"
                                     animationIn="fadeInUp"
                                     animationInDelay={200}
@@ -83,7 +83,7 @@ const RouteDetails = ({data, frete}) => {
                                 </MyCard>
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} md={6}>
                             <Grid container justify="center">
                                 <HomeCard
                                     title="Ajuste de Frete"

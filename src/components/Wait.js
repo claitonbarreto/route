@@ -3,6 +3,8 @@ import { CircularProgress, Grid } from '@material-ui/core'
 import styled from 'styled-components'
 import { Animated } from "react-animated-css";
 
+import Marker from '../components/Marker'
+
 const WaitContainer = styled.div`
     position: absolute;
     width: 100vw;
@@ -43,8 +45,8 @@ const Wait = () => {
         <WaitContainer>
             <Animated animationIn="zoomIn" animationInDuration={500}> 
                 <WaitBody>
-                    <CircularProgress />
-                    <WaitText>Aguarde, buscando rota...</WaitText>
+                    <Marker />
+                    <WaitText>Buscando rota...</WaitText>
                 </WaitBody>
             </Animated>
         </WaitContainer>

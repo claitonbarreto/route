@@ -17,6 +17,7 @@ import Wait from '../../components/Wait'
 import Logo from '../../components/Logo'
 import FooterText from '../../components/FooterText'
 import HomeCard from '../../components/HomeCard'
+import Marker from '../../components/Marker'
 
 //STYLED 
 import {
@@ -94,7 +95,7 @@ const Home = (props) => {
         />
         <Grid
             container
-            xs={12} sm={8} md={8} lg={8} xl={5}
+            xs={10} sm={8} md={8} lg={8} xl={5}
             spacing={0} 
             direction="column" 
             justify="center"
