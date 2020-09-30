@@ -1,32 +1,18 @@
 import styled from 'styled-components'
-import { Grid } from '@material-ui/core'
 
-export const MyGrid = styled.div`
+export const HomeGrid = styled.div`
+    background-image: url(${props => props.imageUrl});
+    background-size: cover;
+    background-position: auto;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-`
 
-export const MyButton = styled.div`
-    margin-top: 60px;
-    background-color: #ED6A5A;
-    border-radius: 10px;
-    & * {color: white;}
+    @media (max-width: 768px) {
+        padding-top: 2rem;
+    }
 `;
-
-export const BottomGridContainer = styled(Grid)`
-    @media (max-width: 960px) {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-`
-
-export const Container = styled(Grid)`
-    @media (max-width: 960px) {
-        margin-top: 1.5rem;
-    }
-`
 
 export const MyTextInput = styled.div`
     margin: 5px 0px 20px 0px;
@@ -65,3 +51,27 @@ export const MyTextInput = styled.div`
         border-bottom-color: ${({theme}) => theme.selectedInputColor}
     }
 `;
+
+export const CardForm = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15%;
+    margin-top: 80px;
+`;
+
+export const MyButton = styled.div`
+    margin-top: 60px;
+    background-color: ${({theme}) => theme.buttonColor};
+    border-radius: 10px;
+    & * {color: white;}
+`;
+
+export const ThemeButtonStyle = styled.div`
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: auto;
+    height: auto;
+    border: 1px solid red;
+`

@@ -1,34 +1,26 @@
 //VENDORS
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
-import { Grid, Paper, Button } from '@material-ui/core'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import { Grid } from '@material-ui/core'
 
 //STORE
 import store from '../../store/index'
 import routeStore from '../../@api/store/routeStore'
 
 //MY COMPONENTS
-import MyCard from '../../components/MyCard/index'
 import MyAlert from '../../components/MyAlert'
-import CepField from '../../components/CepField'
-import FreteField from '../../components/FreteField'
 import RouteActions from '../../actions/RouteActions'
 import AlertAction from '../../actions/AlertAction'
 import FreteAction from '../../actions/FreteAction'
-import ThemeAction from '../../actions/ThemeAction'
 import ErrorAction from '../../actions/ErrorAction'
 import Wait from '../../components/Wait'
-import DarkModeInterruptor from '../../components/DarkModeInterruptor'
 import Logo from '../../components/Logo'
 import FooterText from '../../components/FooterText'
+import HomeCard from '../../components/HomeCard'
 
 //STYLED 
 import {
-    CardForm,
-    HomeGrid,
-    MyButton,
-    MyTextInput
+    HomeGrid
 } from './styles'
 
 const Home = (props) => {
@@ -102,61 +94,19 @@ const Home = (props) => {
         />
         <Grid
             container
+            xs={12} sm={8} md={8} lg={8} xl={5}
             spacing={0} 
-            xs={12} 
-            sm={8} 
-            md={8} 
-            lg={8} 
-            xl={5}
             direction="column" 
             justify="center"
             alignItems="center"
         > 
             <Logo />
-            <MyCard 
-                shadow
-                suggest  
-                cardColor="#05A8AA" 
-                headerText="Calcule sua rota" 
-                redirect={redirect} 
-                themeColor={props.tema}
-                cardWidth={7}
-                xs={12}
-                sm={12}
-                md={10}
-                lg={6}
-                xl={6}
-                animationDuration={50}
-            >
-            <CardForm>
-                <MyTextInput>
-                    <CepField 
-                        id="ORIGEM"
-                        label="CEP de Origem"
-                    />
-                </MyTextInput>
-                <MyTextInput>
-                    <CepField 
-                        id="DESTINO"
-                        label="CEP de Destino"
-                    />
-                </MyTextInput>
-                <MyTextInput>
-                    <FreteField 
-                        id="FRETE"
-                    />
-                </MyTextInput>
-                
-                <MyButton>
-                    <Button
-                        endIcon={<ArrowForwardIosIcon />}
-                        onClick={handleSend}
-                    >
-                        Calcular
-                    </Button>
-                </MyButton>
-            </CardForm>
-            </MyCard>
+            <HomeCard
+                title="Cálculo de rota"
+                redirect={redirect}
+                handleSend={handleSend}
+                tema={props.tema}
+            />
         </Grid>
         <FooterText />
     </HomeGrid>

@@ -10,6 +10,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import styled from 'styled-components'
 
 //My Components
+import HomeCard from '../../components/HomeCard'
 import MyCard from '../../components/MyCard/index'
 import FreteField from '../../components/FreteField'
 import FooterText from '../../components/FooterText'
@@ -19,7 +20,8 @@ import {
     BottomGridContainer,
     Container,
     MyButton,
-    MyGrids
+    MyGrids,
+    MyTextInput
 } from './styles'
 
 const RouteDetails = ({data, frete}) => {
@@ -83,23 +85,11 @@ const RouteDetails = ({data, frete}) => {
                         </Grid>
                         <Grid item xs={6}>
                             <Grid container justify="center">
-                            <Grid item xs={12} sm={10} md={10} lg={8} xl={6}>
-                                 <BigText>Ajustar valor do frete</BigText>
-                                 <FreteField 
-                                     id="FRETE"
-                                 />
-                             <Grid container justify="center" alignItems="center">
-                                 <Grid item xs={5}>
-                                     <MyButton>
-                                         <Button
-                                             endIcon={<ArrowForwardIosIcon />}
-                                         >
-                                             Calcular
-                                         </Button>
-                                     </MyButton>
-                                 </Grid>
-                             </Grid>
-                         </Grid>
+                                <HomeCard
+                                    title="Ajuste de Frete"
+                                    noCeps
+                                    noButton
+                                />
                             </Grid>
                         </Grid>
                     </BottomGridContainer>
