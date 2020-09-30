@@ -37,6 +37,7 @@ const Home = (props) => {
     const [redirect, setRedirect] = useState(false)
 
     const handleCloseAlert = () => {
+        props.dispatch(ErrorAction.clearErrors('dados'))
         props.dispatch(AlertAction.setShowAlert(false))
     }
 
