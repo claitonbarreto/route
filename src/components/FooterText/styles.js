@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    position: absolute;
-    bottom: 0;
-    padding: 0;
-
+    margin-top: 5%;
     @media (max-width: 768px) {
         padding: 0;
     }

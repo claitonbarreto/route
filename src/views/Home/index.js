@@ -107,12 +107,9 @@ const Home = (props) => {
                 redirect={redirect}
                 handleSend={handleSend}
                 tema={props.tema}
-                style={{
-                    marginBottom: '40%'
-                }}
             />
+            <FooterText />
         </Grid>
-        <FooterText />
     </HomeGrid>
     </>
    )

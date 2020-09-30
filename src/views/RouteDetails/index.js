@@ -40,9 +40,6 @@ const RouteDetails = ({data, frete}) => {
                                 cardColor="#3ACECF"
                                 animationIn="fadeInLeft"
                                 xs={12} sm={12} md={12} lg={12} xl={12}
-                                style={{
-                                    marginTop: '15%'
-                                }}
                             >
                                 <Grid container>
                                     <Grid item md={6} style={{width: '100%', borderRight: '0.2px solid #ddd'}}>
@@ -93,15 +90,12 @@ const RouteDetails = ({data, frete}) => {
                                     title="Ajuste de Frete"
                                     noCeps
                                     noButton
-                                    style={{
-                                        marginBottom: '45%'
-                                    }}
                                 />
                             </Grid>
                         </Grid>
                     </BottomGridContainer>
+                    <FooterText />
                 </Grid>
-                <FooterText />
             </Container>
         )}
         </>
