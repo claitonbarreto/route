@@ -3,8 +3,7 @@ import { Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 //Material Ui
-import { Grid, Button } from "@material-ui/core"
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import { Grid } from "@material-ui/core"
 
 //styled components
 import styled from 'styled-components'
@@ -12,7 +11,6 @@ import styled from 'styled-components'
 //My Components
 import HomeCard from '../../components/HomeCard'
 import MyCard from '../../components/MyCard/index'
-import FreteField from '../../components/FreteField'
 import FooterText from '../../components/FooterText'
 
 
@@ -73,7 +71,10 @@ const RouteDetails = ({data, frete}) => {
                                     sm={12} 
                                     md={10} 
                                     lg={10} 
-                                    xl={9} 
+                                    xl={9}
+                                    style={{
+                                        marginBottom: '25px'
+                                    }} 
                                 >
                                     <Grid container>
                                         <Grid item md style={{width: '100%'}}>

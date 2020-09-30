@@ -40,6 +40,7 @@ const MyCard = ({headerText, cardWidth, children, shadow, ...props}) => {
                 direction="row" 
                 justify="center" 
                 alignItems="center"
+                style={props.style}
             >
                 <Container
                     animationIn={props.animationIn}
