@@ -28,6 +28,7 @@ const HomeCard = ({redirect, handleSend, ...props}) => {
             lg={6}
             xl={6}
             animationDuration={50}
+            style={props.style}
         >
         <CardForm>
             {!props.noCeps && (
