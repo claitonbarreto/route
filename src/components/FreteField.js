@@ -38,7 +38,7 @@ const FreteField = ({id, ...props}) => {
                 required
                 error={error}
                 id="FRETE"
-                label="Valor do frete"
+                label="Valor do frete (por Km)"
                 value={props.frete}
                 helperText={helperErrorText !== '' ? helperErrorText : 'use "," como separador'}
                 onChange={handleFreteChange}
