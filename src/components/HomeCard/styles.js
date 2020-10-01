@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
+
 
 export const HomeGrid = styled.div`
     background-image: url(${props => props.imageUrl});
@@ -62,9 +63,26 @@ export const CardForm = styled.div`
 
 export const MyButton = styled.div`
     margin-top: 60px;
+    width: 90%;
+    height: 50px;
+
+    display: flex;
+    justify-content:center;
+
     background-color: ${({theme}) => theme.buttonColor};
     border-radius: 10px;
-    & * {color: white;}
+
+    svg {
+        transition: .2s;
+    }
+
+    :hover {
+        svg {
+            transform: translateX(50%) scale(1.2);
+        }
+    }
+
+    & * {color: white; font-weight: 300}
 `;
 
 export const ThemeButtonStyle = styled.div`
