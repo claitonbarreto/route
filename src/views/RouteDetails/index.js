@@ -43,10 +43,10 @@ const RouteDetails = ({data, frete}) => {
                             >
                                 <Grid container>
                                     <Grid item md={6} style={{width: '100%', borderRight: '0.2px solid #ddd'}}>
-                                        <AdressDetails data={data.origem} target="Origem"/>
+                                        <AdressDetails data={data.origin} target="Origem"/>
                                     </Grid>
                                     <Grid item md={6} style={{width: '100%'}}>
-                                        <AdressDetails data={data.destino} target="Destino"/>
+                                        <AdressDetails data={data.destiny} target="Destino"/>
                                     </Grid>
                                 </Grid>
                             </MyCard>
@@ -126,19 +126,19 @@ const AdressDetails = ({data, target}) => {
         <>
             <MyFlexGrid direction="row">
                 <TextDestak color="#ED6A5A">{target}</TextDestak>
-                <TextLabel>{data.dataCep.cep}</TextLabel>
+                <TextLabel>{data.postalCode}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">
                 <TextDestak color="#ED6A5A">Logradouro</TextDestak>
-                <TextLabel>{data.dataCep.logradouro}</TextLabel>
+                <TextLabel>{data.street}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">
                 <TextDestak color="#ED6A5A">Bairro</TextDestak>
-                <TextLabel>{data.dataCep.bairro}</TextLabel>
+                <TextLabel>{data.neighborhood}</TextLabel>
             </MyFlexGrid>
             <MyFlexGrid direction="row">
                 <TextDestak color="#ED6A5A">Cidade</TextDestak>
-                <TextLabel>{data.dataCep.localidade}</TextLabel>
+                <TextLabel>{data.city}</TextLabel>
             </MyFlexGrid>
         </>
     )
@@ -157,20 +157,20 @@ const RouteDetailsCard = ({data, frete}) => {
     }
     
     const getDistance = () => {
-        let distance = data.response.route[0].summary.distance
+        let distance = data.distance
         distance = `${parseFloat(milhar(distance)).toFixed(2)} Km`
         return distance
     }
 
     const getMinutes = () => {
-        let seconds = data.response.route[0].summary.baseTime
+        let seconds = data.baseTime
         let minutes = seconds/60
         return `${minutes.toFixed(2)} Min`
     }
 
     const getFrete = () => {
         let _frete = frete.replace(',','.')
-        let distance = milhar(data.response.route[0].summary.distance) // 9933
+        let distance = milhar(data.distance) // 9933
         _frete = parseFloat(distance) * parseFloat(_frete)
 
         return `R$${_frete.toFixed(2)}`
